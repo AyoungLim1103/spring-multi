@@ -5,7 +5,7 @@ import com.misolab.core.vo.ApiResponse;
 import net.joins.domain.dao.MemberDao;
 import net.joins.domain.entity.Member;
 import net.joins.domain.repository.MemberRepository;
-import net.joins.web.dto.MemberDto;
+import net.joins.domain.dto.UserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,7 @@ public class IndexController {
         memberRepository.save(member);
 
         List<Member> result = memberDao.allMembers();
-        List<MemberDto> list = result.stream().map(MemberDto::new).collect(Collectors.toList());
+        List<UserInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
 
         ApiResponse response = ApiResponse.of("list", list);
         return ResponseEntity.ok(response);
