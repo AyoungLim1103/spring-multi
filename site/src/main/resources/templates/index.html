@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SITE</title>
+    <script th:src="@{/webjars/vue/vue.min.js}"></script>
+</head>
+<body>
+<div id="app">
+    <p @click="showAlert" th:text="${msg}">This is Site Index Page</p>
+    <p th:text="${current}">00:00</p>
+</div>
+
+<script>
+const app = new Vue({
+    el: "#app",
+    data: {},
+    methods: {
+        showAlert() {
+            alert();
+        }
+    }
+})
+</script>
+
+</body>
+</html>
