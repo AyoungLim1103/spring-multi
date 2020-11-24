@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-    <meta charset="UTF-8">
-    <title>SITE</title>
-    <script th:src="@{/webjars/vue/vue.min.js}"></script>
+    <title layout:title-pattern="$CONTENT_TITLE :: $LAYOUT_TITLE ">Site Tilte</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="style.css" rel="stylesheet" />
 </head>
 <body>
-<div id="app">
-    <p @click="showAlert" th:text="${msg}">This is Site Index Page</p>
-    <p th:text="${current}">00:00</p>
-</div>
-
-<script>
-const app = new Vue({
-    el: "#app",
-    data: {},
-    methods: {
-        showAlert() {
-            alert();
-        }
-    }
-})
-</script>
+<header layout:fragment="header">
+    <h1>Layout Title GNB</h1>
+</header>
+<section layout:fragment="content">
+    <p>Layout Content</p>
+</section>
+<footer layout:fragment="footer">
+    <p>Layout Footer</p>
+</footer>
 
 </body>
 </html>
