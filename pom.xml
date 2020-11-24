@@ -37,6 +37,7 @@
         <!--  site  -->
         <webjars-locator.version>0.30</webjars-locator.version>
         <vue.version>2.6.11</vue.version>
+        <spring-boot-starter-thymeleaf.version>2.4.0</spring-boot-starter-thymeleaf.version>
         <!--  admin  -->
         <frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
         <nodeVersion.version>v12.18.3</nodeVersion.version>
