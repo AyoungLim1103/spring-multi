@@ -2,11 +2,11 @@ package net.joins.site.controller;
 
 import com.misolab.core.exception.BadRequestException;
 import com.misolab.core.vo.ApiResponse;
-import net.joins.domain.dao.MemberDao;
+import lombok.extern.slf4j.Slf4j;
 import net.joins.domain.entity.Member;
-import net.joins.domain.repository.MemberRepository;
-import net.joins.domain.dto.UserInfo;
+import net.joins.domain.dto.MemberInfo;
 import lombok.RequiredArgsConstructor;
+import net.joins.domain.mapper.MemberMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,19 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class IndexController {
 
-    final MemberDao memberDao;
-    final MemberRepository memberRepository;
-
-    @ResponseBody
-    @GetMapping("/api")
-    public ResponseEntity api(@RequestParam String userId, String name) {
+    //@ResponseBody
+    @GetMapping("/test")
+    public String test(@RequestParam String userId, String name) {
 
         if (StringUtils.isEmpty(name)) {
             throw new BadRequestException("name is required parameter");
@@ -38,21 +35,27 @@ public class IndexController {
 
         Member member = new Member();
         member.setUserId(userId);
+
         member.setName(StringUtils.isEmpty(name) ? userId : name);
 
-        memberRepository.save(member);
+        MemberInfo memberInfo = MemberInfo.builder().userId(userId).name(name).build();
 
-        List<Member> result = memberDao.allMembers();
-        List<UserInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
+//        member = MemberMapper.INSTANCE.toEntity(memberInfo);
+        //MemberInfo memberInfo = new MemberInfo();
+        //memberInfo.setUserId(userId);
+        //memberInfo.setName(name);
 
-        ApiResponse response = ApiResponse.of("list", list);
-        return ResponseEntity.ok(response);
+        //List<Member> result = memberDao.allMembers();
+        //List<MemberInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
+
+        //ApiResponse response = ApiResponse.of("list", list);
+        return memberInfo.getUserId();//ResponseEntity.ok(response);
     }
 
     @GetMapping
     public String index(Model model, String msg) {
         model.addAttribute("msg", msg);
-        model.addAttribute("current", memberDao.getDate());
+       // model.addAttribute("current", memberDao.getDate());
 
         return "index";
     }

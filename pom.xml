@@ -31,6 +31,7 @@
         <!--  domain  -->
         <mybatis-spring-boot-starter.version>2.1.2</mybatis-spring-boot-starter.version>
         <mybatis-spring-boot-starter-test.version>2.1.2</mybatis-spring-boot-starter-test.version>
+        <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <!--  web  -->
         <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>

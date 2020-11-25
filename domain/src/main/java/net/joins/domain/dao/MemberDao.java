@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class MemberDao {
 
-    @Autowired
+ /*   @Autowired
     SqlSession sqlSession;
 
     @Autowired
@@ -25,7 +25,7 @@ public class MemberDao {
     public List<Member> allMembers() {
         List<Member> result = sqlSession.selectList("allMembers");
         return result;
-    }
+    }*/
 
 
 }

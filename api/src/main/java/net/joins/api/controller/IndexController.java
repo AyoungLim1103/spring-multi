@@ -1,7 +1,7 @@
 package net.joins.api.controller;
 
 import net.joins.domain.entity.Member;
-import net.joins.web.dto.MemberDto;
+import net.joins.domain.dto.MemberInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class IndexController {
         member.setName(msg);
         member.setUserId(msg);
 
-        MemberDto memberDto = new MemberDto(member);
+        MemberInfo memberDto = null;//new MemberInfo(member);
         return ResponseEntity.ok(memberDto);
     }
 }
