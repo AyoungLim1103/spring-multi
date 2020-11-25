@@ -1,8 +1,7 @@
 package net.joins.admin.controller;
 
-import net.joins.domain.entity.Member;
-import net.joins.web.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
+import net.joins.domain.entity.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,8 +22,7 @@ public class IndexController {
         member.setName(msg);
         member.setUserId(msg);
 
-        MemberDto memberDto = new MemberDto(member);
-        return "This is spring-multi Site " + memberDto.toString();
+        return "This is spring-multi Admin " + member;
     }
 
 
