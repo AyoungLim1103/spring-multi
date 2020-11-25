@@ -28,9 +28,9 @@
     <properties>
         <java.version>1.8</java.version>
         <com.misolab.core.version>0.1.4</com.misolab.core.version>
+        <org.projectlombok.version>1.18.12</org.projectlombok.version>
         <!--  domain  -->
-        <mybatis-spring-boot-starter.version>2.1.2</mybatis-spring-boot-starter.version>
-        <mybatis-spring-boot-starter-test.version>2.1.2</mybatis-spring-boot-starter-test.version>
+        <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <!--  web  -->
         <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>

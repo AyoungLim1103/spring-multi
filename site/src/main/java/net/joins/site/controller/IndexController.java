@@ -3,6 +3,7 @@ package net.joins.site.controller;
 import com.misolab.core.exception.BadRequestException;
 import com.misolab.core.vo.ApiResponse;
 import net.joins.domain.entity.Member;
+import net.joins.domain.mapper.SampleMappler;
 import net.joins.domain.repository.MemberRepository;
 import net.joins.domain.dto.UserInfo;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,11 @@ public class IndexController {
 
     @GetMapping
     public String index(Model model, String msg) {
-        model.addAttribute("msg", msg);
+        Member member = new Member();
+        member.setName(msg);
+
+        UserInfo userInfo = SampleMappler.INSTANCE.memberToUserInfo(member);
+        model.addAttribute("msg", userInfo);
         return "index";
     }
 }
