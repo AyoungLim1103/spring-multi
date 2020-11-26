@@ -6,8 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface SampleMappler {
-    SampleMappler INSTANCE = Mappers.getMapper(SampleMappler.class);
+public interface MemberMapper {
+    MemberMapper INSTANCE = Mappers.getMapper(MemberMapper.class);
 
     UserInfo memberToUserInfo(Member member);
 }
