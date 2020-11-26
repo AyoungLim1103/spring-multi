@@ -3,13 +3,22 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-    <title layout:title-pattern="$CONTENT_TITLE :: $LAYOUT_TITLE ">Site Tilte</title>
+    <title>Site Title</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="style.css" rel="stylesheet" />
+
+    <!-- http://bootstrapk.com/getting-started/ -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!--cumtomize
+    <link rel="stylesheet" type="text/css" href="sitecss.css"/>
+    <script src="sitescript.js"></script>
+    -->
+
 </head>
 <body>
 <header layout:fragment="header">
-    <h1>Layout Title GNB</h1>
+    <h1>여기는 GNB입니다!!!</h1>
 </header>
 <section layout:fragment="content">
     <p>Layout Content</p>
