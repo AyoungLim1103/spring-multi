@@ -21,8 +21,8 @@ public class BoardController {
     public void list(Model model){
         log.info("list() called...");
         List<BoardInfo> listBoardInfo = new ArrayList<>();
-        for(int i=0; i<10; i++){
-            listBoardInfo.add(new BoardInfo(i/3L,"title"+i,i/3L,"username"+i/3,"content"+i,"N",new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis())));
+        for(long i=1L; i<11L; i++){
+            listBoardInfo.add(new BoardInfo(i,"title"+i,i/3,"username"+i,"content"+i,"N",new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis())));
         }
 
         model.addAttribute("listBoardInfo", listBoardInfo);
