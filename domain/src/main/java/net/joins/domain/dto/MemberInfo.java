@@ -12,6 +12,6 @@ import java.util.Arrays;
 
 @ToString
 @Data
-public class UserInfo {
+public class MemberInfo {
     String name;
 }

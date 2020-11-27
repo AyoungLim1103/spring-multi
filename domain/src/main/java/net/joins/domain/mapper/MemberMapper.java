@@ -1,6 +1,6 @@
 package net.joins.domain.mapper;
 
-import net.joins.domain.dto.UserInfo;
+import net.joins.domain.dto.MemberInfo;
 import net.joins.domain.entity.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -9,5 +9,5 @@ import org.mapstruct.factory.Mappers;
 public interface MemberMapper {
     MemberMapper INSTANCE = Mappers.getMapper(MemberMapper.class);
 
-    UserInfo memberToUserInfo(Member member);
+    MemberInfo memberToMemberInfo(Member member);
 }

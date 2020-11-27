@@ -5,7 +5,7 @@ import com.misolab.core.vo.ApiResponse;
 import net.joins.domain.entity.Member;
 import net.joins.domain.mapper.MemberMapper;
 import net.joins.domain.repository.MemberRepository;
-import net.joins.domain.dto.UserInfo;
+import net.joins.domain.dto.MemberInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class IndexController {
 
         memberRepository.save(member);
 
-        List<UserInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
+        List<MemberInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
 
         ApiResponse response = ApiResponse.of("list", list);
         return ResponseEntity.ok(response);
@@ -51,7 +51,7 @@ public class IndexController {
         Member member = new Member();
         member.setName(msg);
 
-        UserInfo userInfo = MemberMapper.INSTANCE.memberToUserInfo(member);
+        MemberInfo userInfo = MemberMapper.INSTANCE.memberToMemberInfo(member);
         model.addAttribute("msg", userInfo);
         return "index";
     }
