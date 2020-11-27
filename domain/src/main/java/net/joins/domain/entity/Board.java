@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+
 @Getter
 @Setter
 @Entity
@@ -30,4 +31,7 @@ public class Board {
     @CreationTimestamp
     private Timestamp updatedate;
 
+    @ManyToOne
+    @JoinColumn(name = "USER_SEQ", insertable = false, updatable = false)
+    Member member = new Member();
 }

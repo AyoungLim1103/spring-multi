@@ -10,4 +10,6 @@ public interface MemberMapper {
     MemberMapper INSTANCE = Mappers.getMapper(MemberMapper.class);
 
     MemberInfo memberToMemberInfo(Member member);
+
+    Member memberInfoToMember(MemberInfo memberInfo);
 }

@@ -12,8 +12,8 @@ import javax.persistence.*;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SEQ")
-    Long id;
+    @Column(name = "USER_SEQ")
+    Long userSeq;
 
     @Column(name = "USER_ID", unique = true, nullable = false)
     String userId;
