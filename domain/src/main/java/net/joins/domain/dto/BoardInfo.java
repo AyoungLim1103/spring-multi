@@ -13,9 +13,10 @@ public class BoardInfo {
 
     private Long bno;
     private String title;
-    private Long userSeq; //userId? userSeq?
+    private Long userSeq;
     private String userName;
     private String content;
+    private String delYN; //삭제유쿠
 
     private Timestamp regdate;
     private Timestamp updatedate;

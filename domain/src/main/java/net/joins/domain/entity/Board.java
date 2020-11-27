@@ -14,10 +14,16 @@ import java.sql.Timestamp;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "BNO")
     private Long bno;
+    @Column(name = "TITLE", length = 300)
     private String title;
+    @Column(name = "USER_SEQ", nullable = false)
     private Long userSeq;
+    @Column(name = "CONTENT", length = 2000)
     private String content;
+    @Column(name = "DEL_YN", length = 1)
+    private String delYN; //삭제유쿠
 
     @CreationTimestamp
     private Timestamp regdate;
