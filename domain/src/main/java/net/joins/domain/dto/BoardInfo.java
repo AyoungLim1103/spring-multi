@@ -1,5 +1,6 @@
 package net.joins.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class BoardInfo {
 
     private Long bno;

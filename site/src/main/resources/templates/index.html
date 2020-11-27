@@ -6,6 +6,9 @@
     <title>Site Title</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+    <!-- 이렇게 함으로써 외부의 CDN 서버에서 가장 최신의 jQuery 배포판을 불러 올 수 있습니다. //-->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    
     <!-- http://bootstrapk.com/getting-started/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -17,7 +20,7 @@
 
 </head>
 <body>
-<header layout:fragment="header">
+<header layout:fragment="header" class="page-header">
     <h1>여기는 GNB입니다!!!</h1>
 </header>
 <section layout:fragment="content">

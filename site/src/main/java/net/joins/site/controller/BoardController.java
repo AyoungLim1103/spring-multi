@@ -2,10 +2,15 @@ package net.joins.site.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import net.joins.domain.dto.BoardInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Log
@@ -15,7 +20,12 @@ public class BoardController {
     @GetMapping("/list")
     public void list(Model model){
         log.info("list() called...");
-        model.addAttribute("greeting", "안녕하세요");
+        List<BoardInfo> listBoardInfo = new ArrayList<>();
+        for(int i=0; i<10; i++){
+            listBoardInfo.add(new BoardInfo(i/3L,"title"+i,i/3L,"username"+i/3,"content"+i,"N",new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis())));
+        }
+
+        model.addAttribute("listBoardInfo", listBoardInfo);
     }
 
     @GetMapping("/write")
