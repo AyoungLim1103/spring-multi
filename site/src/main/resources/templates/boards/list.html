@@ -4,7 +4,6 @@
       layout:decorate="~{/index}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
-    <h2 th:text="${greeting}">Thymeleaf Test Page</h2>
     <div class="panel-heading">List Page</div>
     <div class="panel-body">
         list content...
@@ -36,12 +35,13 @@
                 <td th:text="${#dates.format(board.regdate,'yyyy-MM-dd')}"></td>
                 <td th:text="${#dates.format(board.updatedate,'yyyy-MM-dd')}"></td>
                 <td th:if="${board.userSeq}">
-                    <a href="#" th:if="${board.userSeq == 1}">수정</a>
-                    <p th:unless="${board.userSeq == 1}">VIEW</p>
+                    <a href="#" th:if="${board.userSeq == 1L}">수정</a>
+                    <p th:unless="${board.userSeq == 1L}">VIEW</p>
                 </td>
             </tr>
-
         </table>
     </div>
 </div>
+
+<th:block layout:fragment="script"></th:block>
 </html>

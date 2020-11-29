@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <title>Site Title</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <!-- 이렇게 함으로써 외부의 CDN 서버에서 가장 최신의 jQuery 배포판을 불러 올 수 있습니다. //-->
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
     <!-- http://bootstrapk.com/getting-started/ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <!--cumtomize
-    <link rel="stylesheet" type="text/css" href="sitecss.css"/>
-    <script src="sitescript.js"></script>
-    -->
 
+    <!-- https://html5boilerplate.com/ -->
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script th:src="@{/js/vendor/modernizr-2.8.3.min.js}"></script>
+
+    <!-- main page javascript -->
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 </head>
 <body>
-<header layout:fragment="header" class="page-header">
+<div class="page-header">
     <h1>여기는 GNB입니다!!!</h1>
-</header>
-<section layout:fragment="content">
+</div>
+<!-- 화면별 변하는 부분 -->
+<div class="panel panel-default" layout:fragment="content">
     <p>Layout Content</p>
-</section>
+</div>
 <footer layout:fragment="footer">
-    <p>Layout Footer</p>
+    <p>Footer!!!</p>
 </footer>
+
+<!-- 화면별 각 script -->
+<th:block layout:fragment="script"></th:block>
 
 </body>
 </html>
