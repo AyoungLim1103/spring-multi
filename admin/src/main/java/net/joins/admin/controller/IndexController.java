@@ -1,7 +1,7 @@
 package net.joins.admin.controller;
 
 import lombok.RequiredArgsConstructor;
-import net.joins.domain.entity.Member;
+import net.joins.domain.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,11 +18,11 @@ public class IndexController {
     @ResponseBody
     @GetMapping("/ajax")
     public String api(String msg) {
-        Member member = new Member();
-        member.setName(msg);
-        member.setUserId(msg);
+        User user = new User();
+        user.setName(msg);
+        user.setUserId(msg);
 
-        return "This is spring-multi Admin " + member;
+        return "This is spring-multi Admin " + user;
     }
 
 

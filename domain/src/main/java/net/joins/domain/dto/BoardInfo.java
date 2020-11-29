@@ -16,13 +16,13 @@ public class BoardInfo {
 
     private Long bno;
     private String title;
-    private Long userSeq;
-    //private String userName;
+   // private Long userSeq;
+    private String userName;
     private String content;
     private String delYN; //삭제유쿠
 
     private Timestamp regdate;
     private Timestamp updatedate;
 
-    MemberInfo memberInfo;
+    UserInfo userInfo;
 }

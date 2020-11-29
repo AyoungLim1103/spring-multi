@@ -19,8 +19,8 @@ public class Board {
     private Long bno;
     @Column(name = "TITLE", length = 300)
     private String title;
-    @Column(name = "USER_SEQ", nullable = false)
-    private Long userSeq;
+   // @Column(name = "USER_SEQ", nullable = false)
+    //private Long userSeq;
     @Column(name = "CONTENT", length = 2000)
     private String content;
     @Column(name = "DEL_YN", length = 1)
@@ -31,7 +31,7 @@ public class Board {
     @CreationTimestamp
     private Timestamp updatedate;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_SEQ", insertable = false, updatable = false)
-    Member member = new Member();
+    User user = new User();
 }

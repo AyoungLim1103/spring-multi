@@ -1,9 +1,9 @@
 package net.joins.domain.mapper;
 
 import net.joins.domain.dto.BoardInfo;
-import net.joins.domain.dto.MemberInfo;
+import net.joins.domain.dto.UserInfo;
 import net.joins.domain.entity.Board;
-import net.joins.domain.entity.Member;
+import net.joins.domain.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -17,8 +17,6 @@ public interface BoardMapper {
     BoardInfo boardToBoardInfo(Board board);
     Board boardInfoToBoard(BoardInfo boardInfo);
 
-    @Mapping(source = "member", target = "memberInfo")
+    @Mapping(source = "user", target = "userInfo")
     List<BoardInfo> boardsToBoardInfos(List<Board> boards);
-
-
 }

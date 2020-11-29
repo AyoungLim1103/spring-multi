@@ -2,10 +2,10 @@ package net.joins.site.controller;
 
 import com.misolab.core.exception.BadRequestException;
 import com.misolab.core.vo.ApiResponse;
-import net.joins.domain.entity.Member;
-import net.joins.domain.mapper.MemberMapper;
-import net.joins.domain.repository.MemberRepository;
-import net.joins.domain.dto.MemberInfo;
+import net.joins.domain.entity.User;
+import net.joins.domain.mapper.UserMapper;
+import net.joins.domain.repository.UserRepository;
+import net.joins.domain.dto.UserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/")
 public class IndexController {
 
-    final MemberRepository memberRepository;
+    final UserRepository userRepository;
 
     @ResponseBody
     @GetMapping("/api")
@@ -34,13 +34,13 @@ public class IndexController {
             throw new BadRequestException("name is required parameter");
         }
 
-        Member member = new Member();
-        member.setUserId(userId);
-        member.setName(StringUtils.isEmpty(name) ? userId : name);
+        User user = new User();
+        user.setUserId(userId);
+        user.setName(StringUtils.isEmpty(name) ? userId : name);
 
-        memberRepository.save(member);
+        userRepository.save(user);
 
-        List<MemberInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
+        List<UserInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
 
         ApiResponse response = ApiResponse.of("list", list);
         return ResponseEntity.ok(response);
@@ -48,10 +48,10 @@ public class IndexController {
 
     @GetMapping
     public String index(Model model, String msg) {
-        Member member = new Member();
-        member.setName(msg);
+        User user = new User();
+        user.setName(msg);
 
-        MemberInfo userInfo = MemberMapper.INSTANCE.memberToMemberInfo(member);
+        UserInfo userInfo = UserMapper.INSTANCE.userToUserInfo(user);
         model.addAttribute("msg", userInfo);
         return "index";
     }
