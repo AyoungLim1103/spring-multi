@@ -31,9 +31,9 @@ public class Board {
     @CreationTimestamp
     private Timestamp updatedate;
 
-    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "MEMBER_SEQ", insertable = false, updatable = false)
-    Member member = new Member();
+    @ManyToOne(targetEntity = Member.class)
+    @JoinColumn(name = "MEMBER_SEQ")
+    Member member;
     
     //카테고리 추가 고민
 }
