@@ -15,7 +15,7 @@
                 <td>보드번호</td>
                 <td>제목</td>
                 <td>USERSEQ</td>
-                <td>작성자</td>-
+                <td>작성자</td>
                 <td>내용</td>
                 <td>삭제여부</td>
                 <td>등록날짜</td>
@@ -24,11 +24,11 @@
             <tr th:each="board, iterState : ${listBoardInfo}">
                 <td>체크</td>
                 <td th:text="${iterState.count}"></td>
-                <td th:text="${iterState.size}">
+                <td th:text="${iterState.size}"></td>
                 <td th:text="${board.bno}"></td>
                 <td th:text="${board.title}"></td>
-                <td th:text="${board.memberinfo.memberSeq}"></td>
-                <td th:text="${board.memberinfo.name}"></td>
+                <td th:text="${board.memberInfo.memberSeq}"></td>
+                <td th:text="${board.memberInfo.name}"></td>
                 <td th:text="${board.content}"></td>
                 <td th:text="${board.delYN}"></td>
                 <td th:text="${#dates.format(board.regdate,'yyyy-MM-dd')}"></td>
