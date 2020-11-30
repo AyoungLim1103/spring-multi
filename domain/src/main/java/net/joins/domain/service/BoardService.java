@@ -5,9 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import net.joins.domain.dto.BoardInfo;
 import net.joins.domain.entity.Board;
-import net.joins.domain.entity.User;
 import net.joins.domain.repository.BoardRepository;
-import net.joins.domain.repository.UserRepository;
+import net.joins.domain.repository.MemberRepository;
 import net.joins.domain.mapper.BoardMapper;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.List;
 public class BoardService {
 
     final BoardRepository boardRepository;
-    final UserRepository userRepository;
+    final MemberRepository memberRepository;
 
     public List<BoardInfo> getListAll(){
         //log.info("getAll {}", userId);

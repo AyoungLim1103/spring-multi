@@ -1,7 +1,7 @@
 package net.joins.api.controller;
 
 import lombok.RequiredArgsConstructor;
-import net.joins.domain.entity.User;
+import net.joins.domain.entity.Member;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +14,10 @@ public class IndexController {
 
     @GetMapping
     public ResponseEntity index(String msg) {
-        User user = new User();
-        user.setName(msg);
-        user.setUserId(msg);
+        Member member = new Member();
+        member.setName(msg);
+        member.setMemberId(msg);
 
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(member);
     }
 }

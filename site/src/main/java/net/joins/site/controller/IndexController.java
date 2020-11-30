@@ -2,10 +2,10 @@ package net.joins.site.controller;
 
 import com.misolab.core.exception.BadRequestException;
 import com.misolab.core.vo.ApiResponse;
-import net.joins.domain.entity.User;
-import net.joins.domain.mapper.UserMapper;
-import net.joins.domain.repository.UserRepository;
-import net.joins.domain.dto.UserInfo;
+import net.joins.domain.dto.MemberInfo;
+import net.joins.domain.entity.Member;
+import net.joins.domain.mapper.MemberMapper;
+import net.joins.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,23 +24,23 @@ import java.util.List;
 @RequestMapping("/")
 public class IndexController {
 
-    final UserRepository userRepository;
+    final MemberRepository memberRepository;
 
     @ResponseBody
     @GetMapping("/api")
-    public ResponseEntity api(@RequestParam String userId, String name) {
+    public ResponseEntity api(@RequestParam String memberId, String name) {
 
         if (StringUtils.isEmpty(name)) {
             throw new BadRequestException("name is required parameter");
         }
 
-        User user = new User();
-        user.setUserId(userId);
-        user.setName(StringUtils.isEmpty(name) ? userId : name);
+        Member member = new Member();
+        member.setMemberId(memberId);
+        member.setName(StringUtils.isEmpty(name) ? memberId : name);
 
-        userRepository.save(user);
+        memberRepository.save(member);
 
-        List<UserInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
+        List<MemberInfo> list = new ArrayList<>(); //result.stream().map(UserInfo::new).collect(Collectors.toList());
 
         ApiResponse response = ApiResponse.of("list", list);
         return ResponseEntity.ok(response);
@@ -48,11 +48,11 @@ public class IndexController {
 
     @GetMapping
     public String index(Model model, String msg) {
-        User user = new User();
-        user.setName(msg);
+        Member member = new Member();
+        member.setName(msg);
 
-        UserInfo userInfo = UserMapper.INSTANCE.userToUserInfo(user);
-        model.addAttribute("msg", userInfo);
+        MemberInfo memberInfo = MemberMapper.INSTANCE.memberToMemberInfo(member);
+        model.addAttribute("msg", memberInfo);
         return "index";
     }
 }

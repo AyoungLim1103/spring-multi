@@ -6,19 +6,20 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "TB_USER")
-public class User {
+@Table(name = "TB_MEMBER")
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_SEQ")
-    Long userSeq;
+    @Column(name = "MEMBER_SEQ")
+    Long memberSeq;
 
-    @Column(name = "USER_ID", unique = true, nullable = false)
-    String userId;
+    @Column(name = "MEMBER_ID", unique = true, nullable = false)
+    String memberId;
     @Column(name = "NAME", length = 50)
     String name;
 
@@ -28,7 +29,14 @@ public class User {
     String email;
     @Column(name = "ADMIN_YN", length = 1)
     String adminYn;
+    //admin role 도 고려필요
     @CreationTimestamp
     Timestamp regdate;
+    @CreationTimestamp
+    Timestamp updatedate;
+
+    @OneToMany
+    @JoinColumn(name = "MEMBER_SEQ")
+    List<MemberRole> roles;
 
 }

@@ -1,9 +1,7 @@
 package net.joins.domain.mapper;
 
 import net.joins.domain.dto.BoardInfo;
-import net.joins.domain.dto.UserInfo;
 import net.joins.domain.entity.Board;
-import net.joins.domain.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
