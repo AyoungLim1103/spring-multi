@@ -1,24 +1,21 @@
 package net.joins.domain.repository;
 
+import com.querydsl.core.BooleanBuilder;
 import lombok.extern.java.Log;
 import net.joins.domain.entity.Board;
 import net.joins.domain.entity.Member;
+import net.joins.domain.entity.QBoard;
 import net.joins.domain.service.BoardService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import java.util.stream.IntStream;
 
@@ -53,11 +50,6 @@ public class BoardRepositoryTest {
             board.setMember(member);
             repo.save(board);
         });
-
-        //arumu 프로파일이 안되는듯
-        //List<BoardInfo> listBoardInfo = new ArrayList<>();
-        //listBoardInfo = boardService.getListAll();
-        //log.info(listBoardInfo.toString());
     }
 
     @Test
@@ -69,5 +61,16 @@ public class BoardRepositoryTest {
         log.info("PAGE : "+result.getPageable());
         log.info("===================================");
         result.getContent().forEach(board -> log.info(""+board));
+    }
+
+    @Test
+    public void makePredicate() {
+        BooleanBuilder builder = new BooleanBuilder();
+        QBoard board = new QBoard("board");
+
+        //bno>0
+        builder.and(board.bno.gt(0));
+
+        log.info(builder.toString());
     }
 }
