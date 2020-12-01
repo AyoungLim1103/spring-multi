@@ -3,6 +3,7 @@ package net.joins.site.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.joins.domain.dto.BoardInfo;
+import net.joins.domain.vo.PageMaker;
 import net.joins.domain.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,9 @@ public class BoardController {
         log.info("Page 는? " + page);
         log.info("Result 는? " + result);
 
-        model.addAttribute("result", result);
+        log.info("TOTAL PAGE NUMBER: " + result.getTotalPages());
+
+        model.addAttribute("result", new PageMaker(result));
     }
 
     @GetMapping("/write")

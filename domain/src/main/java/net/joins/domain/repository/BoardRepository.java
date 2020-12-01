@@ -15,15 +15,4 @@ public interface BoardRepository extends CrudRepository<Board, Long>, QuerydslPr
     List<Board> findAll();
 
     List<Board> findAll(Sort sort);
-
-    public default Predicate makePredicate(String type, String key){
-        BooleanBuilder builder = new BooleanBuilder();
-        QBoard board = new QBoard("board");
-
-        //bno>0
-        builder.and(board.bno.gt(0));
-
-        return builder;
-
-    }
 }
