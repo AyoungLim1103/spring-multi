@@ -43,11 +43,6 @@ public class BoardService {
     public Page<BoardInfo> getList(Pageable page){
         Page<Board> result = boardRepository.findAll(makePredicate(null, null), page);
 
-        //Page<BoardInfo> result2 = BoardMapper.INSTANCE.boardPageToBoardInfoPage(result);
-
-        log.info("" + page);
-        log.info("" + result);
-
         return result.map(board -> BoardMapper.INSTANCE.boardToBoardInfo(board));
     }
 
