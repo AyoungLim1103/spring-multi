@@ -20,5 +20,4 @@ public interface BoardMapper {
 
     @Mapping(source = "boards.member", target = "memberInfo")
     List<BoardInfo> boardsToBoardInfos(List<Board> boards);
-    // 이거 여쭤보기
 }

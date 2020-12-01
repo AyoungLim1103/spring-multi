@@ -3,6 +3,11 @@ package net.joins.site.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.joins.domain.dto.BoardInfo;
+import net.joins.domain.vo.PageVO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +26,15 @@ public class BoardController {
     final BoardService boardService;
 
     @GetMapping("/list")
-    public void list(Model model){
-        log.info("list() called...");
-        List<BoardInfo> listBoardInfo = new ArrayList<>();
+    public void list(PageVO vo, Model model){
+        Pageable page = vo.makePageable(0, "bno");
 
-        listBoardInfo = boardService.getListAll();
-        log.info(listBoardInfo.toString());
-        model.addAttribute("listBoardInfo", listBoardInfo);
+        Page<BoardInfo> result = boardService.getList(page);
+
+        log.info("Page 는? " + page);
+        log.info("Result 는? " + result);
+
+        model.addAttribute("result", result);
     }
 
     @GetMapping("/write")

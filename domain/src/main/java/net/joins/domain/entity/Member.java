@@ -27,9 +27,8 @@ public class Member {
     String mobile;
     @Column(name = "EMAIL", length = 200)
     String email;
-    @Column(name = "ADMIN_YN", length = 1)
-    String adminYn;
-    //admin role 도 고려필요
+    //@Column(name = "ADMIN_YN", length = 1)
+   // String adminYn;
     @CreationTimestamp
     Timestamp regdate;
     @CreationTimestamp
