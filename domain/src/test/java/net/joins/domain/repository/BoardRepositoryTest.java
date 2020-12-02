@@ -28,11 +28,9 @@ public class BoardRepositoryTest {
     BoardRepository repo;
     @Autowired
     MemberRepository userRepo;
-    @Autowired
-    BoardService boardService;
 
     @Test
-    public void insertBoardDummies(){
+    public void insertUserBoardDummies(){
 
         IntStream.range(1,10).forEach(i->{
             Member member = new Member();
@@ -50,17 +48,22 @@ public class BoardRepositoryTest {
             board.setMember(member);
             repo.save(board);
         });
-    }
 
-    @Test
-    public void testList1(){
-        Pageable pageable = PageRequest.of(0,10, Sort.Direction.DESC,"bno");
-        Page<Board> result = repo.findAll(
-                repo.makePredicate(null,null),pageable);
+        Member member1 = new Member();
 
-        log.info("PAGE : "+result.getPageable());
-        log.info("===================================");
-        result.getContent().forEach(board -> log.info(""+board));
+        IntStream.range(10,300).forEach(i->{
+
+            member1.setMemberSeq((long)i%9);
+            if(member1.getMemberSeq() == 0)
+                member1.setMemberSeq(9L);
+
+            Board board = new Board();
+            board.setTitle("title"+i);
+            board.setContent("Content"+i);
+            board.setDelYN("N");
+            board.setMember(member1);
+            repo.save(board);
+        });
     }
 
     @Test

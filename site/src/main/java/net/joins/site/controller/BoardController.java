@@ -7,16 +7,11 @@ import net.joins.domain.vo.PageMaker;
 import net.joins.domain.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import net.joins.domain.service.BoardService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -30,12 +25,13 @@ public class BoardController {
     public void list(PageVO vo, Model model){
         Pageable page = vo.makePageable(0, "bno");
 
-        Page<BoardInfo> result = boardService.getList(page);
+        Page<BoardInfo> result = boardService.getList(page,vo);
 
         log.info("Page 는? " + page);
         log.info("Result 는? " + result);
 
         log.info("TOTAL PAGE NUMBER: " + result.getTotalPages());
+        log.info(result.toString());
 
         model.addAttribute("result", new PageMaker(result));
     }
