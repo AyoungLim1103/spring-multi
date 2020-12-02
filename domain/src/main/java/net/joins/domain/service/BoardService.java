@@ -5,6 +5,7 @@ import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.joins.domain.entity.QBoard;
+import net.joins.domain.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -40,8 +41,8 @@ public class BoardService {
         return boardInfos;
     }
 
-    public Page<BoardInfo> getList(Pageable page){
-        Page<Board> result = boardRepository.findAll(makePredicate(null, null), page);
+    public Page<BoardInfo> getList(Pageable page, PageVO vo){
+        Page<Board> result = boardRepository.findAll(makePredicate(vo.getType(), vo.getKeyword()), page);
 
         return result.map(board -> BoardMapper.INSTANCE.boardToBoardInfo(board));
     }
