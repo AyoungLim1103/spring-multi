@@ -15,7 +15,9 @@ import net.joins.domain.entity.Board;
 import net.joins.domain.repository.BoardRepository;
 import net.joins.domain.repository.MemberRepository;
 import net.joins.domain.mapper.BoardMapper;
+import org.springframework.ui.Model;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -72,10 +74,11 @@ public class BoardService {
         return builder;
     }
 
-    public BoardInfo getContent(Long bno) {
-        Board board = boardRepository.findById(bno).get();
+    public Optional<BoardInfo> getContent(Long bno) {
+        Optional<Board> board = boardRepository.findById(bno);
 
-        return BoardMapper.INSTANCE.boardToBoardInfo(board);
+        return Optional.ofNullable(BoardMapper.INSTANCE.boardToBoardInfo(board.get()));
+        //Controller 에서 값 받아서 ifPresent(board -> model.addAttribute.....)  사용 필요
     }
 
     public void saveContent(BoardInfo vo) {
