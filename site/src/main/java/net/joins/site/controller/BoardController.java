@@ -3,15 +3,16 @@ package net.joins.site.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.joins.domain.dto.BoardInfo;
+import net.joins.domain.dto.MemberInfo;
 import net.joins.domain.vo.PageMaker;
 import net.joins.domain.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import net.joins.domain.service.BoardService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequiredArgsConstructor
 @Controller
@@ -36,10 +37,21 @@ public class BoardController {
         model.addAttribute("result", new PageMaker(result));
     }
 
-    @GetMapping("/write")
-    public void write(Model model){
-        log.info("write() called...");
-        model.addAttribute("write", "글작성");
+    @GetMapping("/register")
+    public void registerGET(@ModelAttribute("vo") BoardInfo vo){
+        log.info("register get");
+    }
+
+    @PostMapping("/register")
+    public String registerPOST(@ModelAttribute("vo") BoardInfo vo,
+                               RedirectAttributes rttr){
+        log.info("register post");
+        log.info("vo : "+vo);
+
+        boardService.saveContent(vo);
+        rttr.addFlashAttribute("msg", "success");
+
+        return "redirect:/boards/list";
     }
 
 }

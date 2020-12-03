@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{/index}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content">
+    <div class="panel-heading">Register Page</div>
+    <div class="panel-body">
+        <form th:accept="@{register}" method="post" id="f1">
+            <div class="form-group">
+                <label>Title</label><input class="form-control" name="title" th:value="${vo.title}"/>
+                <p Class="help-block">Title text here</p>
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea class="form-control" rows="3" name="content" th:text="${vo.content}"></textarea>
+            </div>
+            <!--
+            <div class="form-group">
+                <label>Writer</label>
+                <input class="form-control" name="memberInfo.name" th:text="${vo?.memberInfo?.name}" />
+            </div>
+            -->
+            <button type="submit" class="btn btn-default">Submit Button</button>
+            <button type="reset" class="btn btn-primary">Reset Button</button>
+            <!-- 숨기기 -->
+            <input type="hidden" name="delYN" th:value="N" th:text="${vo.delYN}" />
+            <!--<input type="hidden" name="memberInfo.memberSeq" th:value=1 th:text="${vo?.memberInfo?.memberSeq}" />-->
+        </form>
+    </div>
+    <!-- end panel -->
+
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        $(window).load(function(){
+         var msg = [[${msg}]];
+            if(msg == "success"){
+                alert("정상처리되었습니다.");
+                var stateObj = {msg :  ""};
+            }
+        });
+
+
+        $(document).ready(function () {
+            var msg = [[${msg}]];
+            if(msg == "success"){
+                alert("정상처리되었습니다.");
+                var stateObj = {msg :  ""};
+            }
+        });
+        });
+    </script>
+</th:block>
+</html>

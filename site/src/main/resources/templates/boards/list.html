@@ -66,40 +66,6 @@
 
     </div>
     <!-- end panel -->
-
-
-
-    <!-- <div class="panel-body">
-        <table border="1" th:with="target='username1'">
-            <tr>
-                <td>체크박스</td>
-                <td>INDEX</td>
-                <td>SIZE</td>
-                <td>보드번호</td>
-                <td>제목</td>
-                <td>USERSEQ</td>
-                <td>작성자</td>
-                <td>내용</td>
-                <td>삭제여부</td>
-                <td>등록날짜</td>
-                <td>수정날짜</td>
-            </tr>
-            <tr th:each="board, iterState : ${listBoardInfo}">
-                <td>체크</td>
-                <td th:text="${iterState.count}"></td>
-                <td th:text="${iterState.size}"></td>
-                <td th:text="${board.bno}"></td>
-                <td th:text="${board.title}"></td>
-                <td th:text="${board.memberInfo.memberSeq}"></td>
-                <td th:text="${board.memberInfo.name}"></td>
-                <td th:text="${board.content}"></td>
-                <td th:text="${board.delYN}"></td>
-                <td th:text="${#dates.format(board.regdate,'yyyy-MM-dd')}"></td>
-                <td th:text="${#dates.format(board.updatedate,'yyyy-MM-dd')}"></td>
-            </tr>
-        </table>
-    </div>
-    -->
 </div>
 <!-- end fragment -->
 
