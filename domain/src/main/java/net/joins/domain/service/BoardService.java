@@ -86,4 +86,14 @@ public class BoardService {
 
         boardRepository.save(board);
     }
+
+    public Optional<BoardInfo> modifyContent(Long bno) {
+        Optional<Board> board = boardRepository.findById(bno);
+
+        return Optional.ofNullable(BoardMapper.INSTANCE.boardToBoardInfo(board.get()));
+    }
+
+    public void deleteContent(Long bno) {
+        boardRepository.deleteById(bno);
+    }
 }
