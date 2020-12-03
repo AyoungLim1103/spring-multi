@@ -71,24 +71,16 @@ public class BoardService {
         }
         return builder;
     }
-    /*public void getList(String type, String keyword){
-        Pageable paging = PageRequest.of(1, 10); //new PageRequest(0, 10, Sort.Direction.DESC);
-
-        Page<Board> results =boardRepository.findByBnoGreaterThanOrderByBnoDesc(0L, paging);
-
-        System.out.println("PAGE SIZE: " + results.getSize());
-        System.out.println("TOTAL PAGES: " + results.getTotalPages());
-        System.out.println("TOTAL COUNT: " + results.getTotalElements());
-        System.out.println("NEXT: " + results.nextPageable());
-
-        List<Board> list = results.getContent();
-
-        list.forEach(board -> System.out.println(board));
-    }*/
 
     public BoardInfo getContent(Long bno) {
         Board board = boardRepository.findById(bno).get();
 
         return BoardMapper.INSTANCE.boardToBoardInfo(board);
+    }
+
+    public void saveContent(BoardInfo vo) {
+        Board board = BoardMapper.INSTANCE.boardInfoToBoard(vo);
+
+        boardRepository.save(board);
     }
 }
