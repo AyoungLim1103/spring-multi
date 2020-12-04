@@ -5,8 +5,12 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
     <div class="panel-heading">List Page</div>
-    <div class="panel-body">
 
+    <div class="panel-body pull-right">
+        <h3><a class="label label-default" th:href="@{register}">Register</a></h3>
+    </div>
+
+    <div class="panel-body">
         <div th:with="result=${result.result}"> <!-- th:with 변수값 지정 -->
            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                <thead>
@@ -93,6 +97,15 @@
                 formObj.submit();
             });
 
+        });
+
+        $(window).on('load',function () {
+
+            var msg = [[${msg}]];
+            if(msg == "success"){
+                alert("정상처리되었습니다.");
+                var stateObj = {msg :  ""};
+            }
         });
     </script>
 </th:block>

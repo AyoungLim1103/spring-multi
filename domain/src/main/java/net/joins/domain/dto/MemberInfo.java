@@ -15,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class MemberInfo {
     Long memberSeq;
     String memberId;
