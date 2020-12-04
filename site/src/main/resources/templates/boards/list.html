@@ -32,7 +32,7 @@
            </table>
             <div>
                 <select id="searchType">
-                    <option>--</option>
+                    <option>검색조건</option>
                     <option value="t" th:selected="${PageVO?.type} =='t'">TITLE</option>
                     <option value="c" th:selected="${PageVO?.type} =='c'">CONTENT</option>
                     <option value="w" th:selected="${PageVO?.type} =='w'">WRITER</option>
@@ -95,6 +95,16 @@
                 formObj.find('[name="keyword"]').val(keywordStr);
                 formObj.find('[name="page"]').val("1");
                 formObj.submit();
+            });
+
+            $(".boardLink").click(function(e){
+               e.preventDefault();
+               var boardNo = $(this).attr("href");
+
+               formObj.attr("action",[[@{'/boards/view'}]]);
+               formObj.append("<input type='hidden' name='bno' value='"+boardNo+"'>");
+
+               formObj.submit();
             });
 
         });
