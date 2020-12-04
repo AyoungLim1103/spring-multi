@@ -268,17 +268,24 @@ GNB 영역
   height: 75px;
   padding: 1rem;
   color: white;
-  background: teal;
+  background: #222;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-/* position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  */
   margin: 0px;
+}
+#gnb{padding:10px;width: 100%;}
+#gnb .right-item li, #gnb .left-item li{display:inline-block;height:33px;padding:0 25px;}
+#gnb .right-item li > a:hover, #gnb .left-item li > a:hover{color: red;}
+#gnb .right-item li > a, #gnb .left-item li > a {color: white;}
+#gnb .right-item {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+}
+#gnb .left-item{
+  float: left;
+  width: 70%;
 }
 
 footer{

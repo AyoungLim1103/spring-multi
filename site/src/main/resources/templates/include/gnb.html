@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th=xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div class="page-header">
+    <ul id="gnb">
+        <div class="left-item">
+            <li class="p">
+                <a th:href="@{/}">HOME</a>
+            </li>
+            <li class="p">
+                <a th:href="@{/boards/list}" href="#">게시판</a>
+            </li>
+            <li class="p">
+                <a href="#">Menu03</a>
+            </li>
+        </div>
+        <div class="right-item">
+            <li>
+                <a href="#">관리자</a>
+            </li>
+            <li>
+                <a href="#">로그인</a>
+            </li>
+        </div>
+    </ul>
+</div>
+
+<script th:inline="javascript">
+    $(function(){
+        $("#gnb li").mouseover(function(){
+            $(this).children("ul").show();
+            $(this).find("a").addClass("on");
+        });
+        $("#gnb li").mouseout(function(){
+            $(this).children("ul").hide();
+            $(this).find("a").removeClass("on");
+        });
+    });
+</script>
+</html>

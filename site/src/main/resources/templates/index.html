@@ -24,12 +24,12 @@
     <script th:src="@{/js/main.js}"></script>
 </head>
 <body>
-<div class="page-header">
-    <h1>여기는 GNB입니다!!!</h1>
-</div>
+<th:block th:include="include/gnb"></th:block>
+
 <!-- 화면별 변하는 부분 -->
 <div class="panel panel-default" layout:fragment="content">
-    <p>Layout Content</p>
+    <h1>HOME PAGE</h1>
+    <h3>낯선 곳에 오신 이여, 환영합니다!</h3>
 </div>
 <footer layout:fragment="footer">
     <p>Footer!!!</p>
