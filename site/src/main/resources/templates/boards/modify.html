@@ -11,11 +11,11 @@
                 <label>BNO</label><input class="form-control" name="bno" th:value="${vo.bno}" readonly="readonly"/>
             </div>
             <div class="form-group">
-                <label>Title</label><input class="form-control" name="title" th:value="${vo.title}"/>
+                <label>Title</label><input class="form-control" id="title"  name="title" th:value="${vo.title}"/>
             </div>
             <div class="form-group">
                 <label>Content</label>
-                <textarea class="form-control" rows="3" name="content" th:text="${vo.content}"></textarea>
+                <textarea class="form-control" rows="3" id="content" name="content" th:text="${vo.content}"></textarea>
             </div>
             <input type="hidden" name="page" th:value=${pageVO.page} />
             <input type="hidden" name="size" th:value=${pageVO.size} />
@@ -56,6 +56,20 @@
             });
 
             $(".modbtn").click(function(e){
+
+                var chk ="";
+                if($("#title").val().trim() == ""){
+                    chk = "제목을";
+                }else if($("#content").val().trim()== ""){
+                    chk = "내용을";
+                }else{
+
+                }
+                if(chk!=""){
+                    alert(chk + " 입력하세요");
+                    return;
+                }
+
                 formObj.attr("action","modify");
                 formObj.attr("method","post");
 

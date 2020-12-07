@@ -5,7 +5,18 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
     <div class="panel-heading">List Page</div>
-
+    <div class="panel-body pull-left">
+        <h3 style="font-size:110%">
+        <select id="searchType">
+            <option>검색조건</option>
+            <option value="t" th:selected="${PageVO?.type} =='t'">TITLE</option>
+            <option value="c" th:selected="${PageVO?.type} =='c'">CONTENT</option>
+            <option value="w" th:selected="${PageVO?.type} =='w'">WRITER</option>
+        </select>
+        <input type="text" id="searchKeyword">
+        <button id="searchBtn">Search</button>
+        </h3>
+    </div>
     <div class="panel-body pull-right">
         <h3><a class="label label-default" th:href="@{register}">Register</a></h3>
     </div>
@@ -30,16 +41,6 @@
                </tr>
                </tbody>
            </table>
-            <div>
-                <select id="searchType">
-                    <option>검색조건</option>
-                    <option value="t" th:selected="${PageVO?.type} =='t'">TITLE</option>
-                    <option value="c" th:selected="${PageVO?.type} =='c'">CONTENT</option>
-                    <option value="w" th:selected="${PageVO?.type} =='w'">WRITER</option>
-                </select>
-                <input type="text" id="searchKeyword">
-                <button id="searchBtn">Search</button>
-            </div>
         </div>
 
         <!-- paging -->
