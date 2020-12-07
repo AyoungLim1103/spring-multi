@@ -2,6 +2,7 @@ package net.joins.site.controller;
 
 import com.misolab.core.exception.BadRequestException;
 import com.misolab.core.vo.ApiResponse;
+import lombok.extern.java.Log;
 import net.joins.domain.dto.MemberInfo;
 import net.joins.domain.entity.Member;
 import net.joins.domain.mapper.MemberMapper;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/")
+@Log
 public class IndexController {
 
     final MemberRepository memberRepository;
@@ -53,6 +55,30 @@ public class IndexController {
 
         MemberInfo memberInfo = MemberMapper.INSTANCE.memberToMemberInfo(member);
         model.addAttribute("msg", memberInfo);
+        return "index";
+    }
+
+    @RequestMapping("/guest")
+    public String forGuest(){
+        log.info("Guest");
+
+        //임시
+        return "index";
+    }
+
+    @RequestMapping("/manager")
+    public String forManager(){
+        log.info("manager");
+
+        //임시
+        return "index";
+    }
+
+    @RequestMapping("/admin")
+    public String forAdmin(){
+        log.info("admin");
+
+        //임시
         return "index";
     }
 }
