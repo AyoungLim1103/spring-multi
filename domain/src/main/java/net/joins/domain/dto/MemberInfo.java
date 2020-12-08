@@ -19,6 +19,7 @@ import java.util.List;
 public class MemberInfo {
     Long memberSeq;
     String memberId;
+    String memberPw;
     String name;
 
     String mobile;
