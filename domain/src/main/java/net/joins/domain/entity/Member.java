@@ -1,7 +1,9 @@
 package net.joins.domain.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "TB_MEMBER")
+@EqualsAndHashCode(of = "memberId")
+@ToString
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +24,9 @@ public class Member {
 
     @Column(name = "MEMBER_ID", unique = true, nullable = false)
     String memberId;
+    @Column(name = "MEMBER_PW", nullable = false)
+    String memberPw;
+
     @Column(name = "NAME", length = 50)
     String name;
 
@@ -27,15 +34,14 @@ public class Member {
     String mobile;
     @Column(name = "EMAIL", length = 200)
     String email;
-    //@Column(name = "ADMIN_YN", length = 1)
-   // String adminYn;
+
     @CreationTimestamp
     Timestamp regdate;
     @CreationTimestamp
     Timestamp updatedate;
 
-    @OneToMany
-    @JoinColumn(name = "MEMBER_SEQ")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "MEMBER")
     List<MemberRole> roles;
 
 }
