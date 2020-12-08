@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{/index}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<!-- start fragment -->
+<div layout:fragment="content">
+  <div class="panel-body">
+      <div class="alert alert-danger" role="alert">
+          <h2>이 페이지에 대한 권한이 없습니다.</h2>
+          Click Login at <a th:href="@{/login}">here</a>
+      </div>
+  </div>
+</div>
+<!-- end fragment -->
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+    </script>
+</th:block>
+</html>
