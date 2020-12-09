@@ -192,3 +192,5 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+#개인설정부분 제거
+*/datasource-arumu.properties
