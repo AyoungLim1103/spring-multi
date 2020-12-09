@@ -31,7 +31,7 @@ public class BoardRepositoryTest {
 
     @Test
     public void insertUserBoardDummies(){
-
+/*
         IntStream.range(1,10).forEach(i->{
             Member member = new Member();
             //member.setMemberSeq((long) i);
@@ -48,14 +48,14 @@ public class BoardRepositoryTest {
             board.setMember(member);
             repo.save(board);
         });
-
+*/
         Member member1 = new Member();
 
         IntStream.range(10,300).forEach(i->{
 
-            member1.setMemberSeq((long)i%9);
+            member1.setMemberSeq((long)i%10);
             if(member1.getMemberSeq() == 0)
-                member1.setMemberSeq(9L);
+                member1.setMemberSeq(10L);
 
             Board board = new Board();
             board.setTitle("title"+i);

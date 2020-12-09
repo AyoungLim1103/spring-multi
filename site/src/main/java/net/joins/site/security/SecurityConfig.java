@@ -7,9 +7,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import javax.sql.DataSource;
+
 @Log
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    SiteUsersService siteUsersService;
 
     protected void configure(HttpSecurity http) throws Exception {
         log.info("security config...");
@@ -26,16 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //logout
         //http.logout().invalidateHttpSession(true);
         http.logout().logoutUrl("/logout").invalidateHttpSession(true);
-    }
 
-    @Autowired
-    public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception{
-        log.info("Build Auth global......");
-
-        auth.inMemoryAuthentication()
-                .withUser("manager")
-                .password("{noop}1111")
-                .roles("MANAGER");
+        //커스텀 인증방식 사용
+        http.userDetailsService(siteUsersService);
 
     }
 
