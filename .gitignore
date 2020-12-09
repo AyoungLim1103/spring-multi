@@ -194,3 +194,4 @@ fabric.properties
 
 #개인설정부분 제거
 datasource-arumu.properties
+datasource-ayoung.properties
