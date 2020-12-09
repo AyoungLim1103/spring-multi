@@ -193,4 +193,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 #개인설정부분 제거
-*/datasource-arumu.properties
+datasource-arumu.properties
+datasource-ayoung.properties
