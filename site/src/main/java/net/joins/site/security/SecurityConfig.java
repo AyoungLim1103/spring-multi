@@ -6,12 +6,18 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
 @Log
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+    @Autowired
+    DataSource dataSource;
 
     @Autowired
     SiteUsersService siteUsersService;
@@ -33,8 +39,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logout").invalidateHttpSession(true);
 
         //커스텀 인증방식 사용
-        http.userDetailsService(siteUsersService);
+        //http.userDetailsService(siteUsersService);
+        
+        //remember-me 추가
+        //http.rememberMe().key("joins").userDetailsService(siteUsersService);
+        http.rememberMe()
+                .key("joins")
+                .userDetailsService(siteUsersService)
+                .tokenRepository(getJDBCRepository())
+                .tokenValiditySeconds(60*60*24);
 
+    }
+
+    private PersistentTokenRepository getJDBCRepository(){
+        JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+        repo.setDataSource(dataSource);
+        return repo;
     }
 
 }

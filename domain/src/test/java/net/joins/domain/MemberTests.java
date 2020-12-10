@@ -27,7 +27,7 @@ public class MemberTests {
         for(int i = 0; i <= 10; i++) {
             Member member = new Member();
             member.setMemberId("user"+ i);
-            member.setMemberPw("pw" + i);
+            member.setMemberPw("{noop}pw" + i);
             member.setName("사용자" + i);
             member.setEmail("user"+ i + "@joins.com");
             member.setMobile("010-0000-000" + i);
