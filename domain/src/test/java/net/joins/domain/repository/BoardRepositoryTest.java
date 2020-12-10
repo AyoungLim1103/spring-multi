@@ -51,7 +51,7 @@ public class BoardRepositoryTest {
 */
         Member member1 = new Member();
 
-        IntStream.range(10,300).forEach(i->{
+        IntStream.range(1,300).forEach(i->{
 
             member1.setMemberSeq((long)i%10);
             if(member1.getMemberSeq() == 0)
