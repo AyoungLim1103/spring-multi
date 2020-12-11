@@ -9,6 +9,7 @@ import net.joins.domain.mapper.MemberMapper;
 import net.joins.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -81,4 +82,17 @@ public class IndexController {
         //임시
         return "index";
     }
+
+    @Secured("ROLE_ADMIN")
+    @RequestMapping("/adminSecret")
+    public void forAdminSecret(){
+        log.info("admin secret");
+    }
+
+    @Secured("ROLE_MANAGER")
+    @RequestMapping("/managerSecret")
+    public void forManagerSecret(){
+        log.info("manager secret");
+    }
+
 }
