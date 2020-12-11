@@ -29,12 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         log.info("security config...");
 
+        http.authorizeRequests()
+                .antMatchers("/boards/list").permitAll()
+                .antMatchers("/boards/register")
+                .hasAnyRole("BASIC","MANAGER","ADMIN");
+
+        /*
         http.authorizeRequests().antMatchers("/guest/**").permitAll(); //모든 사용자 접근 가능
         http.authorizeRequests().antMatchers("/manager/**").hasRole("MANAGER"); //특정 권한자 접근 가능
         http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN"); //특정 권한자 접근 가능
+         */
 
         // http.formLogin(); //시큐리티에서 자동으로 만들어주는 로그인 페이지
-        http.formLogin().loginPage("/login"); //커스텀 로그인 페이지
+        http.formLogin()
+                .loginPage("/login") //커스텀 로그인 페이지
+                .successHandler(new LoginSuccessHandler());
 
         http.exceptionHandling().accessDeniedPage("/accessDenied");
 

@@ -9,6 +9,7 @@ import net.joins.domain.vo.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -79,6 +80,7 @@ public class BoardController {
         boardService.getContent(bno).ifPresent(board ->model.addAttribute("vo",board));
     }
 
+    @Secured(value={"ROLE_BASIC","ROLE_MANAGER","ROLE_ADMIN"})
     @GetMapping("/modify")
     public void modifyGET(Long bno, @ModelAttribute("pageVO") PageVO vo, Model model){
         log.info("MODIFY BNO : "+bno);
@@ -86,6 +88,7 @@ public class BoardController {
         boardService.modifyContent(bno).ifPresent(board ->model.addAttribute("vo",board));
     }
 
+    @Secured(value={"ROLE_BASIC","ROLE_MANAGER","ROLE_ADMIN"})
     @PostMapping("/modify")
     public String modifyPOST(BoardInfo boardInfo, PageVO vo, RedirectAttributes rttr){
         log.info("MODIFY BoardInfo : "+boardInfo);
@@ -108,6 +111,7 @@ public class BoardController {
         return "redirect:/boards/list";
     }
 
+    @Secured(value={"ROLE_BASIC","ROLE_MANAGER","ROLE_ADMIN"})
     @PostMapping("/delete")
     public String delete(Long bno, @ModelAttribute("pageVO") PageVO vo, RedirectAttributes rttr){
         log.info("MODIFY BNO : "+bno);
