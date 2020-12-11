@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<p>
+    <label>MEMBER_ID</label>
+    <input type="text" name="memberId" th:value="${member.memberId}" readonly/>
+</p>
+<p>
+   <label>MEMBER_PW</label>
+    <input type="text" name="memberPw" th:value="${member.memberPw}" readonly/>
+</p>
+<p>
+    <label>NAME</label>
+    <input type="text" name="name" th:value="${member.name}" readonly/>
+</p>
+
+<p>[[${member.roles]]</p>
+</html>
