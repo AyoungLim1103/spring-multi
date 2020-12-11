@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorate="~{/index}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
@@ -26,7 +27,7 @@
         </div>
     </div>
     <!-- end panel -->
-    <div class="pull-right">
+    <div class="pull-right" th:with="memberId=${#authentication.principal} eq 'anonymousUser' ? 'Guest':${#authentication.principal.memberInfo.memberId}">
         <a th:href="@{modify(page=${pageVO.page}, size=${pageVO.size},type=${pageVO.type},
         keyword=${pageVO.keyword},bno=${vo.bno})}" class="btn btn-default">Modify/Delete</a>
         <a th:href="@{list(page=${pageVO.page}, size=${pageVO.size},type=${pageVO.type},
