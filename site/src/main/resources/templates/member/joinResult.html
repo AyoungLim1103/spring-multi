@@ -3,15 +3,15 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <p>
     <label>MEMBER_ID</label>
-    <input type="text" name="memberId" th:value="${member.memberId}" readonly/>
+    <input type="text" name="memberId" th:value="${memberInfo.memberId}" readonly/>
 </p>
 <p>
    <label>MEMBER_PW</label>
-    <input type="text" name="memberPw" th:value="${member.memberPw}" readonly/>
+    <input type="text" name="memberPw" th:value="${memberInfo.memberPw}" readonly/>
 </p>
 <p>
     <label>NAME</label>
-    <input type="text" name="name" th:value="${member.name}" readonly/>
+    <input type="text" name="name" th:value="${memberInfo.name}" readonly/>
 </p>
 
 <p>[[${member.roles]]</p>
