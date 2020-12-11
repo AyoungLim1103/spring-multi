@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{/index}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content">
 <p>
     <label>MEMBER_ID</label>
     <input type="text" name="memberId" th:value="${memberInfo.memberId}" readonly/>
@@ -15,4 +17,5 @@
 </p>
 
 <p>[[${memberInfo.roles}]]</p>
+</div>
 </html>
