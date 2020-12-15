@@ -67,6 +67,7 @@ public class IndexController {
         return "index";
     }
 
+    @Secured("ROLE_MANAGER")
     @RequestMapping("/manager")
     public String forManager(){
         log.info("manager");
@@ -75,12 +76,13 @@ public class IndexController {
         return "index";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping("/admin")
-    public String forAdmin(){
+    public void forAdmin(){
         log.info("admin");
 
         //임시
-        return "index";
+        //return "index";
     }
 
     @Secured("ROLE_ADMIN")

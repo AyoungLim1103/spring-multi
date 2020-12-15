@@ -41,7 +41,6 @@
         <spring-boot-starter-thymeleaf.version>2.4.0</spring-boot-starter-thymeleaf.version>
         <thymeleaf-layout-dialect.version>2.5.1</thymeleaf-layout-dialect.version>
         <spring-security-config.version>5.3.4.RELEASE</spring-security-config.version>
-        <thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
         <!--  admin  -->
         <frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
         <nodeVersion.version>v12.18.3</nodeVersion.version>

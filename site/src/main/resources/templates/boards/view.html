@@ -27,9 +27,10 @@
         </div>
     </div>
     <!-- end panel -->
-    <div class="pull-right" th:with="memberId=${#authentication.principal} eq 'anonymousUser' ? 'Guest':${#authentication.principal.memberInfo.memberId}">
-        <a th:href="@{modify(page=${pageVO.page}, size=${pageVO.size},type=${pageVO.type},
-        keyword=${pageVO.keyword},bno=${vo.bno})}" class="btn btn-default">Modify/Delete</a>
+    <div class="pull-right" th:with="memberId=${#authentication.principal} eq 'anonymousUser'? 'Guest':${#authentication.principal.member.memberId}" >
+        <a th:if="${memberId} eq ${vo.memberInfo.memberId}"
+           th:href="@{modify(page=${pageVO.page}, size=${pageVO.size},type=${pageVO.type},
+        keyword=${pageVO.keyword},bno=${vo.bno})}" id="goModBtn" class="btn btn-default">Modify/Delete</a>
         <a th:href="@{list(page=${pageVO.page}, size=${pageVO.size},type=${pageVO.type},
         keyword=${pageVO.keyword},bno=${vo.bno})}" class="btn btn-primary">Go List</a>
     </div>
@@ -38,6 +39,25 @@
 
 <th:block layout:fragment="script">
     <script th:inline="javascript">
+
+        $("#goModBtn").click(function(e){
+
+            var memberId = [[${#authentication.principal} eq 'anonymousUser'? null:${#authentication.principal.member.memberId}]];
+
+            e.preventDefault();
+            if(memberId == null){
+                if(confirm("로그인할까요?")){
+                    //self.location = [[@{/login}]];
+                    self.location = $(this).attr("href");
+                }
+            }else{
+                if(memberId == [[${vo.memberInfo.memberId}]]){
+                    self.location = $(this).attr('href');
+                }else{
+                    alert( memberId + "작성자만이 수정이나 삭제할 수 있습니다");
+                }
+            }
+        });
 
     </script>
 </th:block>

@@ -15,10 +15,11 @@
         </div>
         <div class="right-item">
             <li>
-                <a href="#">관리자</a>
+                <a th:href="@{/admin}">관리자</a>
             </li>
-            <li>
-                <a th:href="@{/login}">로그인</a>
+            <li th:with="memberId=${#authentication.principal} eq 'anonymousUser'? 'Guest':${#authentication.principal.member.memberId}">
+                <a th:if="${memberId} eq 'Guest'" th:href="@{/login}">로그인</a>
+                <a th:if="${memberId} != 'Guest'" th:href="@{/logout}">로그아웃</a>
             </li>
         </div>
     </ul>

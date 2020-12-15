@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,10 +48,7 @@ public class BoardController {
                             @ModelAttribute("mvo") MemberInfo mvo){
         log.info("register get");
 
-        //추후 로그인한 Member의 정보로 넣기
-        mvo.setMemberSeq(1L);
-        mvo.setName("user01");
-        vo.setMemberInfo(mvo);
+        //vo.setMemberInfo(mvo);
 
         log.info("vo : "+vo);
     }
@@ -60,8 +58,6 @@ public class BoardController {
                                @ModelAttribute("mvo") MemberInfo mvo,
                                RedirectAttributes rttr){
         log.info("register post");
-        //추후 로그인한 Member의 정보로 넣기
-        mvo.setMemberSeq(1L);
         vo.setMemberInfo(mvo);
         log.info("vo : "+vo);
 
@@ -78,6 +74,7 @@ public class BoardController {
         //Optional<T> 복잡한 조건문 없이도 널(null) 값으로 인해 발생하는 예외를 처리
         //Optional 객체가 감싸고 있는 값이 존재할 경우에만, 실행될 로직을 함수형 인자로 넘김
         boardService.getContent(bno).ifPresent(board ->model.addAttribute("vo",board));
+
     }
 
     @Secured(value={"ROLE_BASIC","ROLE_MANAGER","ROLE_ADMIN"})

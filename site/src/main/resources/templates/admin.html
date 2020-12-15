@@ -9,7 +9,7 @@
 
 <hr/>
 <h3 sec:authentication="name">Spring security username</h3>
-<h3>[[${#authentication}]]</h3>
+<h3>[[${#authentication.principal}]]</h3>
 <hr/>
 <p sec:authorize-url="/admin/aaa">
     <a href="/admin/aaa">ADMIN AAA</a>
