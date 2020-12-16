@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Getter
@@ -32,6 +33,9 @@ public class Board {
     @ManyToOne(targetEntity = Member.class)
     @JoinColumn(name = "MEMBER_SEQ")
     Member member;
+
+    @OneToMany(mappedBy = "board", fetch=FetchType.LAZY)
+    List<Reply> replies;
     
     //카테고리 추가 고민
 }
