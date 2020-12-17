@@ -22,8 +22,11 @@ public class BoardInfo {
     MemberInfo memberInfo;
     List<ReplyInfo> repliesInfo;
 
+    /*
     @Builder
     public BoardInfo(Long bno) {
         this.bno = bno;
     }
+     */
+
 }

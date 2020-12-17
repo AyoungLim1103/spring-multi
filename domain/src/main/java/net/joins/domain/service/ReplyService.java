@@ -27,8 +27,11 @@ public class ReplyService {
     final MemberRepository memberRepository;
     final ReplyRepository replyRepository;
 
+    BoardService boardService;
+
     public BoardInfo save(Long bno, ReplyInfo replyInfo){
-        BoardInfo boardInfo = BoardInfo.builder().bno(bno).build();
+        //BoardInfo boardInfo = BoardInfo.builder().bno(bno).build();
+        BoardInfo boardInfo = boardService.getContent(bno).get();
         boardInfo.setBno(bno);
         replyInfo.setBoardInfo(boardInfo);
 
