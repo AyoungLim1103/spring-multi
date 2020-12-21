@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorate="~{/index}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
@@ -34,11 +33,58 @@
         <a th:href="@{list(page=${pageVO.page}, size=${pageVO.size},type=${pageVO.type},
         keyword=${pageVO.keyword},bno=${vo.bno})}" class="btn btn-primary">Go List</a>
     </div>
+
+    <div class="container">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>RNO</th>
+                <th>REPLY TEXT</th>
+                <th>REPLER</th>
+                <th>REPLY DATE</th>
+            </tr>
+            </thead>
+            <tbody id="replyTable">
+
+            </tbody>
+        </table>
+    </div>
 </div>
 <!-- end fragment -->
 
 <th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{'/js/reply.js'}"></script>
+
     <script th:inline="javascript">
+
+        $(document).ready(function (e) {
+
+            (function () {
+                replyManager.getAll([[${vo.bno}]], printList);
+            })();
+
+            function printList(list) {
+                var str="";
+                var replyObj;
+                for(var i=0; i<list.length; i++){
+                    replyObj = list[i];
+
+                    str+= "<tr>" +
+                            "<td>"+replyObj.rno+"</td>"+
+                            "<td>"+replyObj.replyText+"</td>"+
+                            "<td>"+replyObj.memberInfo.name+"</td>"+
+                            "<td>"+formatDate(replyObj.regdate)+"</td>"+
+                        "</tr>";
+                }
+                $("#replyTable").html(str);
+            }
+
+            function formatDate(timeValue) {
+                var date = new Date(timeValue);
+                return date.getFullYear()+"-"+(date.getMonth()+1 >=10?
+                    date.getMonth()+1: '0'+(date.getMonth()+1))+"-"+date.getDate();
+            }
+        });
 
         $("#goModBtn").click(function(e){
 
