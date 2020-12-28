@@ -48,7 +48,36 @@
 
             </tbody>
         </table>
+        <div class="pull-right">
+            <button class="btn " id="addReplyBtn">Add Reply</button>
+        </div>
     </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!--Modal Content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Reply Text</label>
+                    <input type="text" class="form-control" name="replyText">
+                    <label>Replyer</label>
+                    <input type="text" class="form-control" name="replyer">
+                </div>
+                <div class="modal-footer">
+                    <button id="delModalBtn" class="btn btn-danger">Delete</button>
+                    <button id="modalBtn" class="btn btn-info">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Modal -->
 </div>
 <!-- end fragment -->
 
@@ -84,6 +113,74 @@
                 return date.getFullYear()+"-"+(date.getMonth()+1 >=10?
                     date.getMonth()+1: '0'+(date.getMonth()+1))+"-"+date.getDate();
             }
+            var mode;
+            $("#addReplyBtn").on('click', function(){
+                $("#myModal").modal("show");
+                $(".modal-title").text("Add Reply");
+
+                mode="ADD";
+            });
+            var bno = [[${vo.bno}]];
+
+            var replyTextObj = $("input[name='replyText']");
+            var replyObj = $("input[name='replyer']");
+
+            function afterAll(list){
+                printList(list);
+                $("#myModal").modal("hide");
+                replyTextObj.val("");
+                replyObj.val("");
+            }
+
+            $("#modalBtn").click(function(){
+                if(mode == 'ADD'){
+                    var replyText = replyTextObj.val();
+                    var replyer = replyObj.val();
+
+                    var obj = {replyText:replyText, replyer: replyer, bno:bno};
+
+                    replyManager.add(obj, function (list){
+                        printList(list);
+                        alert("새로운 댓글이 추가되었습니다.")
+                        afterAll(list);
+                    });
+                }else if(mode='MOD'){
+                    var obj = {replyText:replyText, bno:bno, rno:rno};
+
+                    replyManager.update(obj, function (list){
+                        alert("댓글이 수정되었습니다.")
+                        afterAll(list);
+                    });
+                }
+            });
+
+            var rno;
+
+            $("#replyTable").on("click", "tr", function(e){
+                var tds = $(this).find('td');
+
+                console.log(tds);
+
+                rno = tds[0].innerHTML;
+                mode = 'MOD';
+
+                replyTextObj.val(tds[1].innerHTML);
+                replyObj.val(tds[2].innerHTML);
+                $("#myModal").modal("show");
+                $(".modal-title").text("Modify/Delete Reply");
+            });
+
+            $("delModalBtn").on("click", function (){
+                var obj = {bno:bno, rno:rno};
+
+                replyManager.remove(obj, function (list){
+                    printList(list);
+                    alert("댓글이 삭제되었습니다.")
+                    $("#myModal").modal("hide");
+                    replyTextObj.val("");
+                    replyObj.val("");
+                })
+            });
         });
 
         $("#goModBtn").click(function(e){
