@@ -10,7 +10,7 @@ var replyManager = (function () {
 
         $.ajax({
            type:'post',
-           utl:'/replies/'+obj.bno,
+           url:'/replies/'+obj.bno,
            data:JSON.stringify(obj),
            dataType:'json',
            contentType:"application/json" ,
@@ -23,7 +23,7 @@ var replyManager = (function () {
 
         $.ajax({
             type:'put',
-            utl:'/replies/'+obj.bno,
+            url:'/replies/'+obj.bno,
             data:JSON.stringify(obj),
             dataType:'json',
             contentType:"application/json" ,
@@ -36,7 +36,7 @@ var replyManager = (function () {
 
         $.ajax({
             type:'delete',
-            utl:'/replies/'+obj.bno+"/"+obj.rno,
+            url:'/replies/'+obj.bno+"/"+obj.rno,
             data:JSON.stringify(obj),
             dataType:'json',
             contentType:"application/json" ,
