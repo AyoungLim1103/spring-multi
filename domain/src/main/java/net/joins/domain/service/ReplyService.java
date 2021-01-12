@@ -3,10 +3,13 @@ package net.joins.domain.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.joins.domain.dto.BoardInfo;
+import net.joins.domain.dto.MemberInfo;
 import net.joins.domain.dto.ReplyInfo;
 import net.joins.domain.entity.Board;
+import net.joins.domain.entity.Member;
 import net.joins.domain.entity.Reply;
 import net.joins.domain.mapper.BoardMapper;
+import net.joins.domain.mapper.MemberMapper;
 import net.joins.domain.mapper.ReplyMapper;
 import net.joins.domain.repository.BoardRepository;
 import net.joins.domain.repository.MemberRepository;
@@ -29,13 +32,19 @@ public class ReplyService {
 
     BoardService boardService;
 
-    public BoardInfo save(Long bno, ReplyInfo replyInfo){
+    public BoardInfo save(Long bno, ReplyInfo replyInfo, String memberId){
         //BoardInfo boardInfo = boardService.getContent(bno).get();
         Board board = boardRepository.findById(bno).get();
         BoardInfo boardInfo = BoardMapper.INSTANCE.boardToBoardInfo(board);
 
         boardInfo.setBno(bno);
         replyInfo.setBoardInfo(boardInfo);
+
+        Member member = memberRepository.findMemberByMemberId(memberId);
+        MemberInfo memberInfo = MemberMapper.INSTANCE.memberToMemberInfo(member);
+
+        memberInfo.setMemberId(memberId);
+        replyInfo.setMemberInfo(memberInfo);
 
         Reply reply = ReplyMapper.INSTANCE.replyInfoToReply(replyInfo);
 
