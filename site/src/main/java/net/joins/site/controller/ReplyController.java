@@ -8,6 +8,8 @@ import net.joins.domain.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,13 +30,17 @@ public class ReplyController {
     @PostMapping("/{bno}")
     public ResponseEntity<List<ReplyInfo>> addReply(
             @PathVariable("bno") Long bno,
-            @RequestBody ReplyInfo replyInfo){
+            @RequestBody ReplyInfo replyInfo, Authentication authentication){
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String memberId = userDetails.getUsername();
 
         log.info("addReply...");
         log.info("BNO: "+bno);
         log.info("REPLY: ");
 
-        replyService.save(bno,replyInfo);
+        replyService.save(bno,replyInfo, memberId);
 
         return new ResponseEntity<>(replyService.getListByBoard(boardService.getContent(bno).get()),HttpStatus.CREATED);
     }
