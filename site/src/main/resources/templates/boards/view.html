@@ -68,7 +68,7 @@
                     <label>Reply Text</label>
                     <input type="text" class="form-control" name="replyText">
                     <label>Replyer</label>
-                    <input type="text" class="form-control" name="replyer">
+                    <input type="text" class="form-control" name="replyer" readonly="readonly">
                 </div>
                 <div class="modal-footer">
                     <button id="delModalBtn" class="btn btn-danger">Delete</button>
@@ -104,6 +104,7 @@
                             "<td>"+replyObj.replyText+"</td>"+
                             "<td>"+replyObj.memberInfo.name+"</td>"+
                             "<td>"+formatDate(replyObj.regdate)+"</td>"+
+                            "<td id='hiderow' style='display: none;'>"+replyObj.memberInfo.memberId+"</td>"+
                         "</tr>";
                 }
                 $("#replyTable").html(str);
@@ -184,7 +185,7 @@
                 $("#myModal").modal("show");
                 $(".modal-title").text("Modify/Delete Reply");
 
-                if(memberId != tds[2].innerHTML.trim()) {
+                if(memberId != tds[4].innerHTML.trim()) {
                     $("#delModalBtn").hide();
                     $("#modalBtn").hide();
                 }
