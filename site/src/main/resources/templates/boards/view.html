@@ -4,6 +4,7 @@
       layout:decorate="~{/index}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
+    <form th:action="${'/login'}"></form>
     <div class="panel-heading">View Page</div>
     <div class="panel-body">
         <div class="form-group">
@@ -114,9 +115,22 @@
                     date.getMonth()+1: '0'+(date.getMonth()+1))+"-"+date.getDate();
             }
             var mode;
+            var memberId = [[${#authentication.principal} eq 'anonymousUser'? null:${#authentication.principal.member.memberId}]];
+            var csrf=JSON.parse('[[${_csrf}]]');
             $("#addReplyBtn").on('click', function(){
+
+                if(memberId == null) {
+                    if(confirm("로그인할까요?")) {
+                        self.location = [[@{'/login'}]];
+                    }
+                    return;
+                }
+                replyObj.val(memberId);
+
                 $("#myModal").modal("show");
                 $(".modal-title").text("Add Reply");
+
+                $("#delModalBtn").hide();
 
                 mode="ADD";
             });
@@ -137,7 +151,7 @@
                     var replyText = replyTextObj.val();
                     var replyer = replyObj.val();
 
-                    var obj = {replyText:replyText, replyer: replyer, bno:bno};
+                    var obj = {replyText:replyText, replyer: replyer, bno:bno, csrf:csrf};
 
                     replyManager.add(obj, function (list){
                         printList(list);
@@ -166,8 +180,14 @@
 
                 replyTextObj.val(tds[1].innerHTML);
                 replyObj.val(tds[2].innerHTML);
+                $('#delModalBtn').show();
                 $("#myModal").modal("show");
                 $(".modal-title").text("Modify/Delete Reply");
+
+                if(memberId != tds[2].innerHTML.trim()) {
+                    $("#delModalBtn").hide();
+                    $("#modalBtn").hide();
+                }
             });
 
             $("delModalBtn").on("click", function (){

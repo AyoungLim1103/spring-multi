@@ -13,7 +13,8 @@ var replyManager = (function () {
            url:'/replies/'+obj.bno,
            data:JSON.stringify(obj),
            dataType:'json',
-           contentType:"application/json" ,
+            beforeSend : function (xhr){xhr.setRequestHeader(obj.csrf.headerName, obj.csrf.token)},
+           contentType:"application/json",
             success:callback
         });
     };

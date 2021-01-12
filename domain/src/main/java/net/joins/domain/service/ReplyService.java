@@ -30,7 +30,10 @@ public class ReplyService {
     BoardService boardService;
 
     public BoardInfo save(Long bno, ReplyInfo replyInfo){
-        BoardInfo boardInfo = boardService.getContent(bno).get();
+        //BoardInfo boardInfo = boardService.getContent(bno).get();
+        Board board = boardRepository.findById(bno).get();
+        BoardInfo boardInfo = BoardMapper.INSTANCE.boardToBoardInfo(board);
+
         boardInfo.setBno(bno);
         replyInfo.setBoardInfo(boardInfo);
 
