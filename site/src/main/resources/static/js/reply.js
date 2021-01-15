@@ -28,6 +28,9 @@ var replyManager = (function () {
             data:JSON.stringify(obj),
             dataType:'json',
             contentType:"application/json" ,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(obj.csrf.headerName, obj.csrf.token);
+            },
             success:callback
         });
     };
@@ -38,9 +41,10 @@ var replyManager = (function () {
         $.ajax({
             type:'delete',
             url:'/replies/'+obj.bno+"/"+obj.rno,
-            data:JSON.stringify(obj),
             dataType:'json',
-            contentType:"application/json" ,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(obj.csrf.headerName, obj.csrf.token);
+            },
             success:callback
         });
     };
