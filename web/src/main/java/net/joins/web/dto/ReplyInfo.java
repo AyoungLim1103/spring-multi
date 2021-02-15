@@ -1,4 +1,4 @@
-package net.joins.domain.dto;
+package net.joins.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

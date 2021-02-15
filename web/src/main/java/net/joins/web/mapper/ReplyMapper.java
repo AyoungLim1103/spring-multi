@@ -1,6 +1,6 @@
-package net.joins.domain.mapper;
+package net.joins.web.mapper;
 
-import net.joins.domain.dto.ReplyInfo;
+import net.joins.web.dto.ReplyInfo;
 import net.joins.domain.entity.Reply;
 import org.mapstruct.factory.Mappers;
 import org.mapstruct.Mapper;

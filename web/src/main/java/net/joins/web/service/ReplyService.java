@@ -1,26 +1,23 @@
-package net.joins.domain.service;
+package net.joins.web.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.joins.domain.dto.BoardInfo;
-import net.joins.domain.dto.MemberInfo;
-import net.joins.domain.dto.ReplyInfo;
+import net.joins.web.dto.BoardInfo;
+import net.joins.web.dto.MemberInfo;
+import net.joins.web.dto.ReplyInfo;
 import net.joins.domain.entity.Board;
 import net.joins.domain.entity.Member;
 import net.joins.domain.entity.Reply;
-import net.joins.domain.mapper.BoardMapper;
-import net.joins.domain.mapper.MemberMapper;
-import net.joins.domain.mapper.ReplyMapper;
+import net.joins.web.mapper.BoardMapper;
+import net.joins.web.mapper.MemberMapper;
+import net.joins.web.mapper.ReplyMapper;
 import net.joins.domain.repository.BoardRepository;
 import net.joins.domain.repository.MemberRepository;
 import net.joins.domain.repository.ReplyRepository;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor

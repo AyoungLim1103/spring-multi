@@ -1,17 +1,13 @@
 package net.joins.site.controller;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.joins.domain.dto.MemberInfo;
-import net.joins.domain.entity.Board;
+import net.joins.web.dto.MemberInfo;
 import net.joins.domain.entity.Member;
-import net.joins.domain.mapper.BoardMapper;
-import net.joins.domain.mapper.MemberMapper;
+import net.joins.web.mapper.MemberMapper;
 import net.joins.domain.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;

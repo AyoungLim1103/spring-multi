@@ -2,23 +2,20 @@ package net.joins.site.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import net.joins.domain.dto.BoardInfo;
-import net.joins.domain.dto.MemberInfo;
-import net.joins.domain.vo.PageMaker;
-import net.joins.domain.vo.PageVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.joins.web.dto.BoardInfo;
+import net.joins.web.dto.MemberInfo;
+import net.joins.web.vo.PageMaker;
+import net.joins.web.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import net.joins.domain.service.BoardService;
+import net.joins.web.service.BoardService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller

@@ -1,23 +1,20 @@
-package net.joins.domain.service;
+package net.joins.web.service;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.joins.domain.entity.QBoard;
-import net.joins.domain.vo.PageVO;
+import net.joins.web.vo.PageVO;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import net.joins.domain.dto.BoardInfo;
+import net.joins.web.dto.BoardInfo;
 import net.joins.domain.entity.Board;
 import net.joins.domain.repository.BoardRepository;
 import net.joins.domain.repository.MemberRepository;
-import net.joins.domain.mapper.BoardMapper;
-import org.springframework.ui.Model;
+import net.joins.web.mapper.BoardMapper;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

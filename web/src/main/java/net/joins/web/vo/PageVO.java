@@ -1,4 +1,4 @@
-package net.joins.domain.vo;
+package net.joins.web.vo;
 
 
 import org.springframework.data.domain.Pageable;

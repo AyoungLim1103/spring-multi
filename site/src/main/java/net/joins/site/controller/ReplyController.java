@@ -1,10 +1,9 @@
 package net.joins.site.controller;
 
 import lombok.extern.java.Log;
-import net.joins.domain.dto.BoardInfo;
-import net.joins.domain.dto.ReplyInfo;
-import net.joins.domain.service.BoardService;
-import net.joins.domain.service.ReplyService;
+import net.joins.web.dto.ReplyInfo;
+import net.joins.web.service.BoardService;
+import net.joins.web.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController /*Json 형태로 객체 데이터를 반환 @Controller + @ResponseBody*/
 @RequestMapping("/replies/*")

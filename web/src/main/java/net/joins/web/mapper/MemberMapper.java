@@ -1,8 +1,9 @@
-package net.joins.domain.mapper;
+package net.joins.web.mapper;
 
-import net.joins.domain.dto.MemberInfo;
+import net.joins.web.dto.MemberInfo;
 import net.joins.domain.entity.Member;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
