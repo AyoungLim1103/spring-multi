@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import javax.validation.Valid;
 
 @Log
 @Controller
@@ -44,7 +45,7 @@ public class MemberController {
     }
  */
     @PostMapping("/join")
-    public String joinPost(@ModelAttribute("memberInfo") MemberInfo memberInfo){
+    public String joinPost(@Valid @ModelAttribute("memberInfo") MemberInfo memberInfo){
         log.info("MEMBER : "+memberInfo);
 
         String encryptPw = pwEncoder.encode(memberInfo.getMemberPw());

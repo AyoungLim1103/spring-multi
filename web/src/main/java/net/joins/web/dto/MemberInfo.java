@@ -2,6 +2,7 @@ package net.joins.web.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,7 +17,7 @@ public class MemberInfo {
     @NotNull(message = "사용자ID는 필수값 입니다.")
     String memberId;
     String memberPw;
-    @NotNull(message = "사용자 이름은 필수값 입니다.")
+    @NotEmpty(message = "사용자 이름은 필수값 입니다.")
     String name;
 
     String mobile;
