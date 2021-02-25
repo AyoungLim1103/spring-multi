@@ -39,22 +39,16 @@
             var formObj = $("#f1");
             $("#submitBtn").click(function(e){
                 e.preventDefault();
-                var chk ="";
-
-                if($("#title").val().trim() == ""){
-                    chk = "제목을";
-                }else if($("#content").val().trim()== ""){
-                    chk = "내용을";
-                }else{
-
-                }
-                if(chk!=""){
-                    alert(chk + " 입력하세요");
-                    return;
-                }
-
                 formObj.submit();
             });
+        });
+
+        $(window).on('load',function () {
+
+            var msg = [[${msg}]];
+            if(msg != null){
+                alert(msg);
+            }
         });
 
     </script>

@@ -11,11 +11,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import net.joins.web.service.BoardService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -51,9 +56,22 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String registerPOST(@ModelAttribute("vo") BoardInfo vo,
+    public String registerPOST(@Valid @ModelAttribute("vo") BoardInfo vo,
+                               BindingResult bindingResult,
                                @ModelAttribute("mvo") MemberInfo mvo,
                                RedirectAttributes rttr){
+
+        System.out.println("error:"+bindingResult.hasErrors());
+
+        if(bindingResult.hasErrors()){
+            List<ObjectError> list =  bindingResult.getAllErrors();
+            for(ObjectError e : list) {
+                rttr.addFlashAttribute("msg", e.getDefaultMessage());
+                System.out.println(e.getDefaultMessage());
+            }
+            return "redirect:/boards/register";
+        }
+
         log.info("register post");
         vo.setMemberInfo(mvo);
         log.info("vo : "+vo);
