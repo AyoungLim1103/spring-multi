@@ -2,6 +2,7 @@ package net.joins.web.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -14,8 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class MemberInfo {
     Long memberSeq;
-    @NotNull(message = "사용자ID는 필수값 입니다.")
+    @NotEmpty(message = "사용자ID는 필수값 입니다.")
     String memberId;
+    @NotBlank(message = "비밀번호는 필수값 입니다.")
     String memberPw;
     @NotEmpty(message = "사용자 이름은 필수값 입니다.")
     String name;
@@ -27,4 +29,8 @@ public class MemberInfo {
     Timestamp updatedate;
 
     List<MemberRoleInfo> roles;
+
+    public MemberInfo() {
+
+    }
 }

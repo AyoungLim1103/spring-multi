@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{/index}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
-<form method="post">
+<form method="post" th:object="${memberInfo}" th:action="@{/member/join}">
     <p>
         <label>MEMBER_ID</label>
-        <input type="text" name="memberId" value="newbie"/>
+        <input type="text" name="memberId" th:field="*{memberId}" />
+        <p th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></p>
     </p>
     <p>
         <label>MEMBER_PW</label>
-        <input type="password" name="memberPw" value="newbie"/>
+        <input type="password" name="memberPw" th:field="*{memberPw}" />
+        <p th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}"></p>
     </p>
     <p>
         <label>MEMBER_NAME</label>
-        <input type="text" name="name" value="홍길동"/>
+        <input type="text" name="name" th:field="*{name}" />
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
     </p>
     <p>
         <input type="checkbox" name="roles[0].roleName" value="BASIC" checked>BASIC
