@@ -1,9 +1,9 @@
 package net.joins.site.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.joins.web.dto.MemberInfo;
 import net.joins.domain.entity.Member;
-import net.joins.web.mapper.MemberMapper;
 import net.joins.domain.repository.MemberRepository;
 import net.joins.web.service.BoardService;
 import net.joins.web.service.MemberService;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
-import java.util.Map;
 
+@RequiredArgsConstructor
 @Log
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
 
-    MemberService memberService;
+    final MemberService memberService;
 
     @Autowired
     PasswordEncoder pwEncoder;
@@ -35,7 +35,7 @@ public class MemberController {
 
     @GetMapping("/join")
     public String join(Model model){
-        model.addAttribute("memberInfo", new MemberInfo());
+        model.addAttribute("memberInfo", MemberInfo.builder().build());
         return "/member/join";
 
     }
@@ -66,10 +66,9 @@ public class MemberController {
         log.info("en : "+encryptPw);
         memberInfo.setMemberPw(encryptPw);
 
-        //service 단으로 옮겨도 됨
-        Member member = MemberMapper.INSTANCE.memberInfoToMember(memberInfo);
-
-        repo.save(member);
+        if(memberInfo != null) {
+            memberService.saveMember(memberInfo);
+        }
 
         return "/member/joinResult";
     }

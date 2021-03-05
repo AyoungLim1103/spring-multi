@@ -29,8 +29,4 @@ public class MemberInfo {
     Timestamp updatedate;
 
     List<MemberRoleInfo> roles;
-
-    public MemberInfo() {
-
-    }
 }
