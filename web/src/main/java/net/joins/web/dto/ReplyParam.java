@@ -12,12 +12,11 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @AllArgsConstructor
-public class ReplyInfo {
+public class ReplyParam {
     Long rno;
-    @NotNull(message = "댓글내용을 입력하세요.")
     String replyText;
     Timestamp regdate;
-    String insertUserId;
-    String insertUserNm;
-    Long bno;
+    Timestamp updatedate;
+    MemberInfo memberInfo;
+    BoardInfo boardInfo;
 }

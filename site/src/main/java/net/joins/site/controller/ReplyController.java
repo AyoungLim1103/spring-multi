@@ -2,6 +2,7 @@ package net.joins.site.controller;
 
 import lombok.extern.java.Log;
 import net.joins.web.dto.ReplyInfo;
+import net.joins.web.dto.ReplyParam;
 import net.joins.web.service.BoardService;
 import net.joins.web.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ReplyController {
     @PostMapping("/{bno}")
     public ResponseEntity<List<ReplyInfo>> addReply(
             @PathVariable("bno") Long bno,
-            @RequestBody ReplyInfo replyInfo, Authentication authentication){
+            @RequestBody ReplyParam replyParam, Authentication authentication){
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
@@ -38,7 +39,7 @@ public class ReplyController {
         log.info("BNO: "+bno);
         log.info("REPLY: ");
 
-        replyService.save(bno,replyInfo, memberId);
+        replyService.save(bno,replyParam, memberId);
 
         return new ResponseEntity<>(replyService.getListByBoard(boardService.getContent(bno).get()),HttpStatus.CREATED);
     }
@@ -59,10 +60,10 @@ public class ReplyController {
     @PutMapping("/{bno}")
     public ResponseEntity<List<ReplyInfo>> modify(
             @PathVariable("bno") Long bno,
-            @RequestBody ReplyInfo replyInfo){
-        log.info("modify reply: "+replyInfo);
+            @RequestBody ReplyParam replyParam){
+        log.info("modify reply: "+replyParam);
 
-        replyService.modify(replyInfo);
+        replyService.modify(replyParam);
 
         return new ResponseEntity<>(replyService.getListByBoard(boardService.getContent(bno).get()), HttpStatus.CREATED);
     }

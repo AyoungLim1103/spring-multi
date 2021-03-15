@@ -102,9 +102,9 @@
                     str+= "<tr>" +
                             "<td>"+replyObj.rno+"</td>"+
                             "<td>"+replyObj.replyText+"</td>"+
-                            "<td>"+replyObj.memberInfo.name+"</td>"+
+                            "<td>"+replyObj.insertUserNm+"</td>"+
                             "<td>"+formatDate(replyObj.regdate)+"</td>"+
-                            "<td id='hiderow' style='display: none;'>"+replyObj.memberInfo.memberId+"</td>"+
+                            "<td id='hiderow' style='display: none;'>"+replyObj.insertUserId+"</td>"+
                         "</tr>";
                 }
                 $("#replyTable").html(str);
@@ -131,7 +131,9 @@
                 $("#myModal").modal("show");
                 $(".modal-title").text("Add Reply");
 
+                $("#modalBtn").show();
                 $("#delModalBtn").hide();
+                replyTextObj.val("");
 
                 mode="ADD";
             });
