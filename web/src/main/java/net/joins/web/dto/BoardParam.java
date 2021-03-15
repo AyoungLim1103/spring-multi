@@ -23,7 +23,6 @@ public class BoardParam {
 
     private String delYN;
 
-    @NotBlank(message = "내용을 입력해주세요")
-    String memberId;
+    Long memberSeq;
 
 }

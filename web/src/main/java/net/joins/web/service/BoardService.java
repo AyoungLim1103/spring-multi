@@ -5,6 +5,8 @@ import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.joins.domain.entity.QBoard;
+import net.joins.web.dto.BoardParam;
+import net.joins.web.mapper.BoardParamMapper;
 import net.joins.web.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -80,6 +82,12 @@ public class BoardService {
 
     public void saveContent(BoardInfo vo) {
         Board board = BoardMapper.INSTANCE.boardInfoToBoard(vo);
+
+        boardRepository.save(board);
+    }
+
+    public void saveContent(BoardParam boardParam) {
+        Board board = BoardParamMapper.INSTANCE.boardParamToBoard(boardParam);
 
         boardRepository.save(board);
     }

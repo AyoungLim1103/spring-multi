@@ -3,6 +3,7 @@ package net.joins.site.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import net.joins.web.dto.BoardInfo;
+import net.joins.web.dto.BoardParam;
 import net.joins.web.dto.MemberInfo;
 import net.joins.web.vo.PageMaker;
 import net.joins.web.vo.PageVO;
@@ -54,7 +55,7 @@ public class BoardController {
 
         log.info("vo : "+vo);
     }
-
+/*
     @PostMapping("/register")
     public String registerPOST(@Valid @ModelAttribute("vo") BoardInfo vo,
                                BindingResult bindingResult,
@@ -77,6 +78,33 @@ public class BoardController {
         log.info("vo : "+vo);
 
         boardService.saveContent(vo);
+        rttr.addFlashAttribute("msg", "success");
+
+        return "redirect:/boards/list";
+    }
+*/
+
+    @PostMapping("/register")
+    public String registerPOST(@Valid @ModelAttribute("boardParam") BoardParam boardParam,
+                               BindingResult bindingResult,
+                               RedirectAttributes rttr){
+
+        log.info("register post");
+
+        System.out.println("error:"+bindingResult.hasErrors());
+
+        if(bindingResult.hasErrors()){
+            List<ObjectError> list =  bindingResult.getAllErrors();
+            for(ObjectError e : list) {
+                rttr.addFlashAttribute("msg", e.getDefaultMessage());
+                System.out.println(e.getDefaultMessage());
+            }
+            return "redirect:/boards/register";
+        }
+
+        log.info("register post");
+        boardService.saveContent(boardParam);
+        log.info("boardParam : "+boardParam);
         rttr.addFlashAttribute("msg", "success");
 
         return "redirect:/boards/list";
