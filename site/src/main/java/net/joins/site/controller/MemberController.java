@@ -5,6 +5,7 @@ import lombok.extern.java.Log;
 import net.joins.web.dto.MemberInfo;
 import net.joins.domain.entity.Member;
 import net.joins.domain.repository.MemberRepository;
+import net.joins.web.dto.MemberParam;
 import net.joins.web.service.BoardService;
 import net.joins.web.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,19 +56,19 @@ public class MemberController {
     }
  */
     @PostMapping("/join")
-    public String joinPost(@Valid @ModelAttribute("memberInfo") MemberInfo memberInfo, BindingResult bindingResult){
-        log.info("MEMBER : "+memberInfo);
+    public String joinPost(@Valid @ModelAttribute("memberParam") MemberParam memberParam, BindingResult bindingResult){
+        log.info("MEMBER : " + memberParam);
 
         if(bindingResult.hasErrors()){
             return "/member/join";
         }
 
-        String encryptPw = pwEncoder.encode(memberInfo.getMemberPw());
+        String encryptPw = pwEncoder.encode(memberParam.getMemberPw());
         log.info("en : "+encryptPw);
-        memberInfo.setMemberPw(encryptPw);
+        memberParam.setMemberPw(encryptPw);
 
-        if(memberInfo != null) {
-            memberService.saveMember(memberInfo);
+        if(memberParam != null) {
+            memberService.saveMember(memberParam);
         }
 
         return "/member/joinResult";

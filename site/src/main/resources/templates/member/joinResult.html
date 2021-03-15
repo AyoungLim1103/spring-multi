@@ -5,17 +5,17 @@
 <div layout:fragment="content">
 <p>
     <label>MEMBER_ID</label>
-    <input type="text" name="memberId" th:value="${memberInfo.memberId}" readonly/>
+    <input type="text" name="memberId" th:value="${memberParam.memberId}" readonly/>
 </p>
 <p>
    <label>MEMBER_PW</label>
-    <input type="text" name="memberPw" th:value="${memberInfo.memberPw}" readonly/>
+    <input type="text" name="memberPw" th:value="${memberParam.memberPw}" readonly/>
 </p>
 <p>
     <label>NAME</label>
-    <input type="text" name="name" th:value="${memberInfo.name}" readonly/>
+    <input type="text" name="name" th:value="${memberParam.name}" readonly/>
 </p>
 
-<p>[[${memberInfo.roles}]]</p>
+<p>[[${memberParam.roles}]]</p>
 </div>
 </html>
