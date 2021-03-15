@@ -12,15 +12,15 @@ import java.util.List;
 public interface ReplyMapper {
     ReplyMapper INSTANCE = Mappers.getMapper(ReplyMapper.class);
 
-    @Mapping(source = "reply.board", target = "boardInfo")
-    @Mapping(source = "reply.member", target = "memberInfo")
+    @Mapping(target = "bno", ignore = true)
+    @Mapping(target = "insertUserNm", ignore = true)
+    @Mapping(target = "insertUserId", ignore = true)
     ReplyInfo replyToReplyInfo(Reply reply);
 
-    @Mapping(source = "replyInfo.boardInfo", target = "board")
-    @Mapping(source = "replyInfo.memberInfo", target = "member")
-    Reply replyInfoToReply(ReplyInfo replyInfo);
+    //Reply replyInfoToReply(ReplyInfo replyInfo);
 
-    @Mapping(source = "replies.board", target = "boardInfo")
-    @Mapping(source = "replies.member", target = "memberInfo")
-    List<ReplyInfo> repliesInfoToReplies(List<Reply> replies);
+    @Mapping(target = "bno", ignore = true)
+    @Mapping(target = "insertUserNm", ignore = true)
+    @Mapping(target = "insertUserId", ignore = true)
+    List<ReplyInfo> repliesToRepliesInfo(List<Reply> replies);
 }

@@ -8,12 +8,14 @@ import net.joins.web.dto.ReplyInfo;
 import net.joins.domain.entity.Board;
 import net.joins.domain.entity.Member;
 import net.joins.domain.entity.Reply;
+import net.joins.web.dto.ReplyParam;
 import net.joins.web.mapper.BoardMapper;
 import net.joins.web.mapper.MemberMapper;
 import net.joins.web.mapper.ReplyMapper;
 import net.joins.domain.repository.BoardRepository;
 import net.joins.domain.repository.MemberRepository;
 import net.joins.domain.repository.ReplyRepository;
+import net.joins.web.mapper.ReplyParamMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,21 +31,21 @@ public class ReplyService {
 
     BoardService boardService;
 
-    public BoardInfo save(Long bno, ReplyInfo replyInfo, String memberId){
+    public BoardInfo save(Long bno, ReplyParam replyParam, String memberId){
         //BoardInfo boardInfo = boardService.getContent(bno).get();
         Board board = boardRepository.findById(bno).get();
         BoardInfo boardInfo = BoardMapper.INSTANCE.boardToBoardInfo(board);
 
         boardInfo.setBno(bno);
-        replyInfo.setBoardInfo(boardInfo);
+        replyParam.setBoardInfo(boardInfo);
 
         Member member = memberRepository.findMemberByMemberId(memberId);
         MemberInfo memberInfo = MemberMapper.INSTANCE.memberToMemberInfo(member);
 
         memberInfo.setMemberId(memberId);
-        replyInfo.setMemberInfo(memberInfo);
+        replyParam.setMemberInfo(memberInfo);
 
-        Reply reply = ReplyMapper.INSTANCE.replyInfoToReply(replyInfo);
+        Reply reply = ReplyParamMapper.INSTANCE.replyParamToReply(replyParam);
 
         replyRepository.save(reply);
 
@@ -54,8 +56,8 @@ public class ReplyService {
         replyRepository.deleteById(rno);
     }
 
-    public void modify(ReplyInfo replyInfo){
-        replyRepository.findById(replyInfo.getRno()).ifPresent(origin -> {origin.setReplyText(replyInfo.getReplyText());
+    public void modify(ReplyParam replyParam){
+        replyRepository.findById(replyParam.getRno()).ifPresent(origin -> {origin.setReplyText(replyParam.getReplyText());
         replyRepository.save(origin);
         });
     }
@@ -65,12 +67,19 @@ public class ReplyService {
         List<Reply> replies = replyRepository.getRepliesOfBoard(board);
         List<ReplyInfo> repliesInfo = new ArrayList<>();
 
-        if(replies != null)
-            repliesInfo = ReplyMapper.INSTANCE.repliesInfoToReplies(replies);
+        if(replies != null) {
+            repliesInfo = ReplyMapper.INSTANCE.repliesToRepliesInfo(replies);
+            log.info("댓글 리스트 불러오기 [getListByBoard]");
 
+            for(int i = 0; i < replyRepository.countByBno(board); i++){
+                String insertUserNm = replies.get(i).getMember().getName();
+                String insertUserId = replies.get(i).getMember().getMemberId();
+                repliesInfo.get(i).setInsertUserNm(insertUserNm);
+                repliesInfo.get(i).setInsertUserId(insertUserId);
+                repliesInfo.get(i).setBno(boardInfo.getBno());
+            }
+        }
         return repliesInfo;
     }
-
-
 }
 
