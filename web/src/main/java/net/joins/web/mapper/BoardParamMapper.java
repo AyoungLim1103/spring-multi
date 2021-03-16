@@ -14,4 +14,7 @@ public interface BoardParamMapper {
     @Mapping(target = "updatedate", ignore = true)
     @Mapping(source = "boardParam.memberSeq", target = "member.memberSeq")
     Board boardParamToBoard(BoardParam boardParam);
+
+    @Mapping(source = "member.memberSeq", target = "memberSeq")
+    BoardParam boardToBoardParam(Board board);
 }

@@ -4,6 +4,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.joins.domain.entity.Member;
 import net.joins.domain.entity.QBoard;
 import net.joins.web.dto.BoardParam;
 import net.joins.web.mapper.BoardParamMapper;
@@ -79,24 +80,26 @@ public class BoardService {
         return Optional.ofNullable(BoardMapper.INSTANCE.boardToBoardInfo(board.get()));
         //Controller 에서 값 받아서 ifPresent(board -> model.addAttribute.....)  사용 필요
     }
-
+/*
     public void saveContent(BoardInfo vo) {
         Board board = BoardMapper.INSTANCE.boardInfoToBoard(vo);
 
         boardRepository.save(board);
     }
-
-    public void saveContent(BoardParam boardParam) {
+*/
+    public void saveContent(BoardParam boardParam, String memberId) {
+        Member member = memberRepository.findMemberByMemberId(memberId);
+        boardParam.setMemberSeq(member.getMemberSeq());
         Board board = BoardParamMapper.INSTANCE.boardParamToBoard(boardParam);
 
         boardRepository.save(board);
     }
 
-    public Optional<BoardInfo> modifyContent(Long bno) {
+    public Optional<BoardParam> modifyContent(Long bno) {
         Optional<Board> board = boardRepository.findById(bno);
-
-        return Optional.ofNullable(BoardMapper.INSTANCE.boardToBoardInfo(board.get()));
+        return Optional.ofNullable(BoardParamMapper.INSTANCE.boardToBoardParam(board.get()));
     }
+
 
     public void deleteContent(Long bno) {
         boardRepository.deleteById(bno);

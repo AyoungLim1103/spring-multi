@@ -10,17 +10,17 @@ import net.joins.web.vo.PageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import net.joins.web.service.BoardService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.sql.Timestamp;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -50,44 +50,14 @@ public class BoardController {
     public void registerGET(@ModelAttribute("vo") BoardInfo vo,
                             @ModelAttribute("mvo") MemberInfo mvo){
         log.info("register get");
-
-        //vo.setMemberInfo(mvo);
-
         log.info("vo : "+vo);
     }
-/*
-    @PostMapping("/register")
-    public String registerPOST(@Valid @ModelAttribute("vo") BoardInfo vo,
-                               BindingResult bindingResult,
-                               @ModelAttribute("mvo") MemberInfo mvo,
-                               RedirectAttributes rttr){
-
-        System.out.println("error:"+bindingResult.hasErrors());
-
-        if(bindingResult.hasErrors()){
-            List<ObjectError> list =  bindingResult.getAllErrors();
-            for(ObjectError e : list) {
-                rttr.addFlashAttribute("msg", e.getDefaultMessage());
-                System.out.println(e.getDefaultMessage());
-            }
-            return "redirect:/boards/register";
-        }
-
-        log.info("register post");
-        vo.setMemberInfo(mvo);
-        log.info("vo : "+vo);
-
-        boardService.saveContent(vo);
-        rttr.addFlashAttribute("msg", "success");
-
-        return "redirect:/boards/list";
-    }
-*/
 
     @PostMapping("/register")
     public String registerPOST(@Valid @ModelAttribute("boardParam") BoardParam boardParam,
                                BindingResult bindingResult,
-                               RedirectAttributes rttr){
+                               RedirectAttributes rttr,
+                               @AuthenticationPrincipal UserDetails userDetails){
 
         log.info("register post");
 
@@ -103,7 +73,7 @@ public class BoardController {
         }
 
         log.info("register post");
-        boardService.saveContent(boardParam);
+        boardService.saveContent(boardParam,userDetails.getUsername());
         log.info("boardParam : "+boardParam);
         rttr.addFlashAttribute("msg", "success");
 
@@ -125,20 +95,22 @@ public class BoardController {
     public void modifyGET(Long bno, @ModelAttribute("pageVO") PageVO vo, Model model){
         log.info("MODIFY BNO : "+bno);
 
-        boardService.modifyContent(bno).ifPresent(board ->model.addAttribute("vo",board));
+        boardService.getContent(bno).ifPresent(board ->model.addAttribute("vo",board));
     }
 
     @Secured(value={"ROLE_BASIC","ROLE_MANAGER","ROLE_ADMIN"})
     @PostMapping("/modify")
-    public String modifyPOST(BoardInfo boardInfo, PageVO vo, RedirectAttributes rttr){
-        log.info("MODIFY BoardInfo : "+boardInfo);
+    public String modifyPOST(@Valid BoardParam boardParam,
+                             PageVO vo,
+                             RedirectAttributes rttr,
+                             @AuthenticationPrincipal UserDetails userDetails){
 
-        boardService.modifyContent(boardInfo.getBno()).ifPresent(origin -> {
-            origin.setTitle(boardInfo.getTitle());
-            origin.setContent(boardInfo.getContent());
-            origin.setUpdatedate(new Timestamp(System.currentTimeMillis())); //수정한 시간
+        log.info("MODIFY BoardParam : "+boardParam);
 
-            boardService.saveContent(origin);
+        boardService.modifyContent(boardParam.getBno()).ifPresent(origin -> {
+            origin.setTitle(boardParam.getTitle());
+            origin.setContent(boardParam.getContent());
+            boardService.saveContent(origin, userDetails.getUsername());
             rttr.addFlashAttribute("msg","success");
             rttr.addAttribute("bno",origin.getBno());
         });
