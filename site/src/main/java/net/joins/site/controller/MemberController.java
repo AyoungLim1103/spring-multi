@@ -36,7 +36,7 @@ public class MemberController {
 
     @GetMapping("/join")
     public String join(Model model){
-        model.addAttribute("memberInfo", MemberInfo.builder().build());
+        model.addAttribute("memberParam", MemberInfo.builder().build());
         return "/member/join";
 
     }

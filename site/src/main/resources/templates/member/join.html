@@ -3,7 +3,7 @@
       layout:decorate="~{/index}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
-<form method="post" th:object="${memberInfo}" th:action="@{/member/join}">
+<form method="post" th:object="${memberParam}" th:action="@{/member/join}">
     <p>
         <label>MEMBER_ID</label>
         <input type="text" name="memberId" th:field="*{memberId}" />
